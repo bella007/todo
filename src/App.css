@@ -26,3 +26,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.editable {
+  conteeditable: true;
+}
+.str {
+  text-decoration: line-through;
+}

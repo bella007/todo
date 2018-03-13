@@ -1,22 +1,45 @@
 import React, { Component } from 'react';
-import '../App.css';
-import Task from './Taskk'
-import { addTask } from '../actions';
+import Task from './Task'
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import '../App.css';
+import {List, ListItem} from 'material-ui/List';
+
+
+import AddTask from './AddTask'
+import { addTask, delTask, editTask, checkedTask } from '../actions';
+
 
 const mapStateToProps = (state) => {
-    return { posts: state.tasks }
+    return { tasks: state.tasks }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({ addTask }, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({ addTask, delTask, editTask, checkedTask }, dispatch) );
 
-class Tasks extends Component {
+const tab_style={
+    width:400,
+    };
+
+class TaskList extends Component {
     render() {
         return (
-            <Task />
+            <div style={tab_style}>
+
+                <AddTask />
+                {this.props.tasks.map((item, index)=>(
+                    < Task data={item}
+                           index={index}
+                           key={index}
+                           delete={this.props.delTask}
+                           edit={this.props.editTask}
+                           checked={this.props.checkedTask}
+                            />
+                ))}
+
+            </div>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tasks);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

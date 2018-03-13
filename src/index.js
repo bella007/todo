@@ -6,13 +6,15 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './store';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 ReactDOM.render(
+    <MuiThemeProvider>
         <Provider store={store}>
             <Router>
                 <App />
             </Router>
         </Provider>
-
+    </MuiThemeProvider>
     , document.getElementById('root'));
