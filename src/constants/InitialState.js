@@ -1,7 +1,17 @@
 export default ({
     tasks: [
         {
-            title: 'Initial Second',
+            title: 'Initial 4',
+            done: true,
+
+        },
+        {
+            title: 'Initial 3',
+            done: true,
+
+        },
+        {
+            title: 'Initial 2',
             done: false,
 
         },

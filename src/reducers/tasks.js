@@ -7,18 +7,23 @@ export default function tasks(state = initial, action) {
 
     switch (type) {
         case types.ADD_TASK:
-            let new_task={...payload,done:false}
+            let new_task={...payload,done:false};
             return [new_task, ...state];
+
         case types.DEL_TASK:
             return state.filter((item, index) => index !== payload);
-        // case types.EDITED_TASK:
-        //     return state.map((item, index) => index === payload ? {...item, ...payload})
 
         case types.CHECKED_TASK:
-            return state.map((item, index) => {
-                if(index === payload) return {...item, done: !item.done}
-                else return {...item, done: false};
+            return state.map((task, index) => {
+                if (index === payload) {
+                    return Object.assign({}, task, {
+                        done: !task.done
+                    })
+                }
+                return task
             });
+        // case types.EDITED_TASK:
+        //     return state.map((item, index) => index === payload ? {...item, ...payload})
 
         default:
             return state;

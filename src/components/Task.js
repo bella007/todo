@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {FormGroup, FormControlLabel} from 'material-ui/List';
-import {List,  ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
 import {red500, blue500} from 'material-ui/styles/colors';
@@ -37,7 +36,6 @@ class Task extends Component {
     handleEdit = () => {
         console.log(this.state.edit)
         this.setState({edit: !this.state.edit});
-        console.log(this.state.edit)
     };
 
 
@@ -46,18 +44,16 @@ class Task extends Component {
     )
 
     render() {
-        console.log(this.props.data.done)
         return (
             <div>
                 <ListItem
                     rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh" onClick={this.handleDelete}  />}
                     onDoubleClick={this.handleEdit}
-                    // leftIcon={<Checkbox
-                    //     checked={this.props.data.done}
-                    //     onCheck={this.handleChange}
-                    // />}
                     >
-                    <div>{this.props.data.title}</div>
+                    <div  style={{
+                        textDecoration: this.props.data.done ? 'line-through' : 'none',
+                        contentEditable: this.state.edit ? true : false,
+                    }}>{this.props.data.title}</div>
                     <Checkbox
                         checked={this.props.data.done}
                         onCheck={this.handleChange}

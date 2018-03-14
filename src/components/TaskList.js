@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-import Task from './Task'
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+
 import '../App.css';
-import {List, ListItem} from 'material-ui/List';
-
-
+import FlatButton from 'material-ui/FlatButton';
+import Task from './Task'
 import AddTask from './AddTask'
-import { addTask, delTask, editTask, checkedTask } from '../actions';
+import {withRouter} from 'react-router';
+
+import { addTask, delTask, editTask, checkedTask,} from '../actions';
 
 
-const mapStateToProps = (state) => {
-    return { tasks: state.tasks }
+const mapStateToProps = (state, ownProps) => {
+    let filter_params = ownProps.location.pathname;
+    return {
+        tasks: (filter_params ==='/')? (state.tasks)
+            :  state.tasks.filter((item, index) => item.done=== (filter_params !== '/active'))
+
+    }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({ addTask, delTask, editTask, checkedTask }, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({ addTask, delTask, editTask, checkedTask}, dispatch) );
 
 const tab_style={
     width:400,
     };
 
+
 class TaskList extends Component {
+
+    handleOnKeyDown= (e) => {
+        this.props.history.push(`${e.target.value}`);
+    };
+
+
     render() {
         return (
             <div style={tab_style}>
@@ -36,10 +49,12 @@ class TaskList extends Component {
                            checked={this.props.checkedTask}
                             />
                 ))}
-
+            <button onClick={this.handleOnKeyDown} value="">All</button>
+            <button onClick={this.handleOnKeyDown} value="active">Active</button>
+            <button onClick={this.handleOnKeyDown} value="completed">Completed</button>
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TaskList));
