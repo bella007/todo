@@ -1,44 +1,49 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import '../App.css';
-import TextField from 'material-ui/TextField';
 
-import { addTask } from '../actions';
+import {addTask} from '../actions';
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({ addTask }, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({addTask}, dispatch) );
 
 class AddTask extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            input_val: '',
+        };
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleOnSubmit(e) {
         e.preventDefault();
 
-        if(this.refs.task_text.value.trim() !== '') {
+        if (this.state.input_val.trim() !== '') {
             let new_task = {
-                title: this.refs.task_text.value,
+                title: this.state.input_val,
             };
             this.props.addTask(new_task);
         }
-        this.refs.task_text.value = '';
+
+        this.setState({input_val: ''});
     };
 
-    componentDidUpdate() {
-        this.refs.task_text.value = '';
+    handleChange(e) {
+        this.setState({input_val: e.target.value});
     }
 
     render() {
         return (
-        <div>
-            <form onSubmit={this.handleOnSubmit}>
-                <input type="text" ref="task_text" placeholder="What needs to be done?"/>
-                <button type="submit">Add</button>
-            </form>
-        </div>
+            <div>
+                <form onSubmit={this.handleOnSubmit}>
+                    <input type="text" onChange={this.handleChange} value={this.state.input_val}
+                           placeholder="What needs to be done?"/>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
         );
     }
 }

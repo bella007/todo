@@ -9,10 +9,6 @@ const iconStyles = {
     marginRight: 24,
 };
 
-const editStyle ={
-    contentEditable: true
-};
-
 const DeleteIcon = (props) => (
     <SvgIcon {...props}>
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41
@@ -41,7 +37,7 @@ class Task extends Component {
 
     handleChange = () => (
         this.props.checked(this.props.index)
-    )
+    );
 
     render() {
         return (
