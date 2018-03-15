@@ -3,21 +3,25 @@ export default ({
         {
             title: 'Initial 4',
             done: true,
+            id: 4,
 
         },
         {
             title: 'Initial 3',
             done: true,
+            id: 3,
 
         },
         {
             title: 'Initial 2',
             done: false,
+            id: 2,
 
         },
         {
             title: 'Initial First',
             done: false,
+            id: 1,
 
         }
     ]

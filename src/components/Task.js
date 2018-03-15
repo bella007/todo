@@ -25,7 +25,7 @@ class Task extends Component {
     }
 
     handleDelete = () => (
-        this.props.delete(this.props.index)
+        this.props.delete(this.props.data.id)
     );
 
 
@@ -36,7 +36,7 @@ class Task extends Component {
 
 
     handleChange = () => (
-        this.props.checked(this.props.index)
+        this.props.checked(this.props.data.id)
     );
 
     render() {
