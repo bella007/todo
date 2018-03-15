@@ -25,7 +25,7 @@ const tasksMiddleware = store => next => (action) => {
         localStorage.setItem('tasks', JSON.stringify(store.getState().tasks));
         return;
     }
-    else if (action.type === DEL_TASK || action.type === CHECKED_TASK) {
+    else if (action.type === DEL_TASK || action.type === CHECKED_TASK || action.type === EDITED_TASK) {
         next(action);
         localStorage.setItem('tasks', JSON.stringify(store.getState().tasks));
         return;

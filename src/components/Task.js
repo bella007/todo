@@ -34,6 +34,10 @@ class Task extends Component {
         this.setState({editable: !this.state.editable});
     };
 
+    handleSubmitEdit = () => {
+        this.props.edit({data:this.props.data, input_val:this.state.input_val});
+        this.handleEdit()
+    };
 
     handleChange = () => (
         this.props.checked(this.props.data.id)
@@ -42,6 +46,10 @@ class Task extends Component {
     handleChangeInput = (e) => {
         console.log(e.target.title);
         this.setState({input_val: e.target.value})
+    };
+    handleCancel =() => {
+        this.setState({input_val: this.props.data.title})
+        this.handleEdit()
     };
 
     render() {
@@ -52,9 +60,9 @@ class Task extends Component {
                                            onClick={this.handleDelete}/>}
                     onDoubleClick={this.handleEdit}
                 >
-                    {this.state.editable ? <input value={this.state.input_val} onChange={this.handleChangeInput}/>
+                    {this.state.editable ? <div><input value={this.state.input_val} onChange={this.handleChangeInput}/><button onClick={this.handleSubmitEdit}>Edit</button><button onClick={this.handleCancel}>Cancel</button></div>
                         : <div
-                            style={{textDecoration: this.props.data.done ? 'line-through' : 'none',}}>{this.state.input_val}</div>
+                            style={{textDecoration: this.props.data.done ? 'line-through' : 'none',}}>{this.props.data.title}</div>
                     }
                     {/*{this.props.data.title}*/}
                     <Checkbox

@@ -16,7 +16,7 @@ export default function tasks(state = initial, action) {
         case types.ADD_TASK:
             let task_id = uniq_id();
             let new_task = {...payload, done: false, id: (state[task_id] ? uniq_id() : task_id)};
-            console.log(new_task)
+            console.log(new_task);
             return [new_task, ...state];
         case types.DEL_TASK:
             return state.filter(item => item.id !== payload);
@@ -30,9 +30,20 @@ export default function tasks(state = initial, action) {
                 }
                 return task
             });
-        // case types.EDITED_TASK:
-        //     return state.map((item, index) => index === payload ? {...item, ...payload})
+        case types.EDITED_TASK:
+            // return state.map((item, index) => index === payload ? {...item, ...payload}:true);
+            // return state.map((item, index) =>(item.id == payload?));
+            console.log('dsgfffffffffffffffffffffffffffffffffffff', payload)
 
+            return state.map(task => {
+                if (task.id === payload.data.id) {
+                    return Object.assign({}, task, {
+                        title: payload.input_val
+                    })
+                }
+                return task
+
+            });
         default:
             return state;
     }

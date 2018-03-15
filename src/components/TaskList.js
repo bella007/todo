@@ -40,9 +40,8 @@ class TaskList extends Component {
     render() {
         return (
             <div style={tab_style}>
-
                 <AddTask/>
-                {console.log(this.props.tasks)}
+                {console.log('this.props.tasksthis.props.tasks',this.props.tasks)}
                 {this.props.tasks.map((item, index) => (
                     < Task data={item}
                            index={index}
