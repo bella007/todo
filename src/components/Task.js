@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
@@ -12,7 +12,7 @@ const iconStyles = {
 const DeleteIcon = (props) => (
     <SvgIcon {...props}>
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41
-        10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+        10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
     </SvgIcon>
 );
 
@@ -20,7 +20,8 @@ class Task extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            edit: false,
+            editable: false,
+            input_val: this.props.data.title,
         }
     }
 
@@ -30,8 +31,7 @@ class Task extends Component {
 
 
     handleEdit = () => {
-        console.log(this.state.edit)
-        this.setState({edit: !this.state.edit});
+        this.setState({editable: !this.state.editable});
     };
 
 
@@ -39,18 +39,24 @@ class Task extends Component {
         this.props.checked(this.props.data.id)
     );
 
+    handleChangeInput = (e) => {
+        console.log(e.target.title);
+        this.setState({input_val: e.target.value})
+    };
+
     render() {
         return (
             <div>
                 <ListItem
-                    rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh" onClick={this.handleDelete}  />}
+                    rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh"
+                                           onClick={this.handleDelete}/>}
                     onDoubleClick={this.handleEdit}
-                    >
-                    <div  style={{
-                        textDecoration: this.props.data.done ? 'line-through' : 'none',
-                        //TODO: наведи курсор на запись 'this.state.edit ? true : false' и нажми alt enter -> enter
-                        contentEditable: this.state.edit ? true : false,
-                    }}>{this.props.data.title}</div>
+                >
+                    {this.state.editable ? <input value={this.state.input_val} onChange={this.handleChangeInput}/>
+                        : <div
+                            style={{textDecoration: this.props.data.done ? 'line-through' : 'none',}}>{this.state.input_val}</div>
+                    }
+                    {/*{this.props.data.title}*/}
                     <Checkbox
                         checked={this.props.data.done}
                         onCheck={this.handleChange}

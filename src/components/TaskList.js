@@ -11,19 +11,15 @@ import {withRouter} from 'react-router';
 import {addTask, delTask, editTask, checkedTask,} from '../actions';
 
 let filters = {
-    '': true,
-    //TODO (item, index) => !item.done
-    '/active': (item, index) => (item.done === false),
-    '/completed': (item, index) => (item.done === true),
+    '/': (item, index) => item,
+    '/active': (item, index) => (!item.done),
+    '/completed': (item, index) => (item.done),
 };
 
 const mapStateToProps = (state, ownProps) => {
     let filter_params = ownProps.location.pathname;
     return {
-        //TODO тут можно сделать еще лучше, вот так tasks: state.tasks.filter(filters[filter_params]), только нужно изменить строчку 14
-        tasks: (filter_params === '/') ? (state.tasks)
-            : state.tasks.filter(filters[filter_params])
-
+        tasks: state.tasks.filter(filters[filter_params])
     }
 };
 
@@ -46,6 +42,7 @@ class TaskList extends Component {
             <div style={tab_style}>
 
                 <AddTask/>
+                {console.log(this.props.tasks)}
                 {this.props.tasks.map((item, index) => (
                     < Task data={item}
                            index={index}

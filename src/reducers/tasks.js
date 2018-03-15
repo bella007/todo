@@ -1,20 +1,22 @@
 import InitialState from '../constants/InitialState';
 import * as types from '../constants/ActionTypes';
 
-const initial = InitialState.tasks;
+function uniq_id() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+}
+
+const initial = JSON.parse(localStorage.getItem('tasks')) || InitialState.tasks;
+
 export default function tasks(state = initial, action) {
     let {type, payload} = action;
 
     switch (type) {
         case types.ADD_TASK:
-            //TODO move this function out of this scope
-            function uniq_id() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-            }
-            let a=uniq_id();
-            let new_task={...payload,done:false,id:(state[a]?uniq_id():a)};
+            let task_id = uniq_id();
+            let new_task = {...payload, done: false, id: (state[task_id] ? uniq_id() : task_id)};
+            console.log(new_task)
             return [new_task, ...state];
         case types.DEL_TASK:
             return state.filter(item => item.id !== payload);
