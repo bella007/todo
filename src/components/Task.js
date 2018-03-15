@@ -48,6 +48,7 @@ class Task extends Component {
                     >
                     <div  style={{
                         textDecoration: this.props.data.done ? 'line-through' : 'none',
+                        //TODO: наведи курсор на запись 'this.state.edit ? true : false' и нажми alt enter -> enter
                         contentEditable: this.state.edit ? true : false,
                     }}>{this.props.data.title}</div>
                     <Checkbox
