@@ -7,6 +7,7 @@ export default function tasks(state = initial, action) {
 
     switch (type) {
         case types.ADD_TASK:
+            //TODO move this function out of this scope
             function uniq_id() {
                 return Math.floor((1 + Math.random()) * 0x10000)
                     .toString(16)
