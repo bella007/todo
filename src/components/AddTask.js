@@ -13,7 +13,7 @@ class AddTask extends Component {
         super(props);
         this.state = {
             //TODO назови ее как то получше, как нибудь newTask, это повысит читабельностью
-            input_val: '',
+            changed_task: '',
         };
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -22,25 +22,25 @@ class AddTask extends Component {
     handleOnSubmit(e) {
         e.preventDefault();
 
-        if (this.state.input_val.trim() !== '') {
+        if (this.state.changed_task.trim() !== '') {
             let new_task = {
-                title: this.state.input_val,
+                title: this.state.changed_task,
             };
             this.props.addTask(new_task);
         }
 
-        this.setState({input_val: ''});
+        this.setState({changed_task: ''});
     };
 
     handleChange(e) {
-        this.setState({input_val: e.target.value});
+        this.setState({changed_task: e.target.value});
     }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleOnSubmit}>
-                    <input type="text" onChange={this.handleChange} value={this.state.input_val}
+                    <input type="text" onChange={this.handleChange} value={this.state.changed_task}
                            placeholder="What needs to be done?"/>
                     <button type="submit">Add</button>
                 </form>
