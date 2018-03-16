@@ -12,7 +12,6 @@ class AddTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            //TODO назови ее как то получше, как нибудь newTask, это повысит читабельностью
             changed_task: '',
         };
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
