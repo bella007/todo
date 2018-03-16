@@ -25,34 +25,29 @@ class Task extends Component {
         }
     }
 
-    componentWillReceiveProps=(nextProps)=> {
-      this.setState({input_val:nextProps.data.title})
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({input_val: nextProps.data.title})
     };
     handleDelete = () => (
         this.props.delete(this.props.data.id)
     );
-
     handleChangeState = () => (
         this.props.checked(this.props.data.id)
     );
-
-
     handleEdit = () => {
-        //TODO Изменение этой строчки пофиксит баг
-        this.setState({editable: !this.state.editable, });
+        this.setState({editable: !this.state.editable,});
     };
-
     handleSubmitEdit = () => {
         this.props.edit({data: this.props.data, input_val: this.state.input_val});
         this.handleEdit()
     };
-
     handleChangeInput = (e) => (
         this.setState({input_val: e.target.value})
     );
     handleCancel = () => (
         this.handleEdit()
     );
+
     render() {
         return (
             <div>
@@ -69,7 +64,6 @@ class Task extends Component {
                         : <div
                             style={{textDecoration: this.props.data.done ? 'line-through' : 'none',}}>{this.props.data.title}</div>
                     }
-                    {/*{this.props.data.title}*/}
                     <Checkbox
                         checked={this.props.data.done}
                         onCheck={this.handleChangeState}
