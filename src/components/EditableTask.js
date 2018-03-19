@@ -28,7 +28,7 @@ class EditableTask extends Component {
     render() {
         return (
             <div>
-                {this.state.editable ? <div><input value={this.state.input_val} onBlur={this.handleSubmitEdit} onChange={this.handleChangeInput}/>
+                {this.state.editable ? <div><input autoFocus={true} value={this.state.input_val} onBlur={this.handleSubmitEdit} onChange={this.handleChangeInput} />
                         <button onClick={this.handleSubmitEdit}>Edit</button>
                         <button onClick={this.handleCancel}>Cancel</button>
                     </div>
