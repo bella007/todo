@@ -9,7 +9,9 @@ class EditableTask extends Component {
             input_val: this.props.data.title,
         }
     }
-
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({input_val: nextProps.data.title})
+    };
     handleEdit = () => {
         this.setState({editable: !this.state.editable,});
     };

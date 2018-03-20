@@ -25,9 +25,7 @@ class Task extends Component {
         }
     }
 
-    componentWillReceiveProps = (nextProps) => {
-        this.setState({input_val: nextProps.data.title})
-    };
+
     handleDelete = () => (
         this.props.delete(this.props.data.id)
     );
