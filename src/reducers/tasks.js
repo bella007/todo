@@ -21,6 +21,7 @@ export default function tasks(state = initial, action) {
             return state.filter(item => item.id !== payload);
 
         case types.CHECKED_TASK:
+            //TODO то же самое что и на строчке 34
             return state.map(task => {
                 if (task.id === payload) {
                     return Object.assign({}, task, {
@@ -30,6 +31,7 @@ export default function tasks(state = initial, action) {
                 return task
             });
         case types.EDITED_TASK:
+            //TODO тебе тут не нужно мап делать, тебе тут нужен только 1 элемент который ты ищешь по id
             return state.map(task => {
                 if (task.id === payload.data.id) {
                     return Object.assign({}, task, {
