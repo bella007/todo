@@ -11,21 +11,35 @@
 // // module.exports = Mongoose.model('Task', TaskSchema);
 // //
 // console.log('Ух ты! Крошечное Node-приложение!');
-var express = require('express');
+// var express = require('express');
+//
+// // создаём Express-приложение
+// var app = express();
+//
+// // создаём маршрут для главной страницы
+// // http://localhost:8080/
+// app.get('/', function(req, res) {
+//     res.sendfile('src/index.js');
+// });
+//
+// app.listen(8080);
 
-// создаём Express-приложение
+var express = require('express');
 var app = express();
 
-// создаём маршрут для главной страницы
-// http://localhost:8080/
-app.get('/', function(req, res) {
-    res.sendfile('src/index.js');
+app.get('/', function (req, res) {
+    res.sendfile('build/index.html');
+});
+app.get('/', function (req, res) {
+    res.sendfile('build/index.html');
 });
 
-// запускаем сервер на порту 8080
-app.listen(8080);
-// отправляем сообщение
-console.log('Сервер стартовал!');
+app.listen(8080, function () {
+    console.log('APP listening on port 3000!');
+});
+
+
+
 // var mongoose = require("mongoose");
 // mongoose.connect("mongodb://localhost/cat_app");
 //
