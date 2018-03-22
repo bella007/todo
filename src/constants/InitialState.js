@@ -24,5 +24,15 @@ export default ({
             id: 1,
 
         }
+    ],
+    all_users: [
+        {
+            login:'user1'
+
+        },
+        {
+            login:'user2'
+
+        }
     ]
 });

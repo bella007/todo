@@ -34,6 +34,7 @@ const tasksMiddleware = store => next => (action) => {
 
 };
 
+// const middleware = applyMiddleware(tasksMiddleware);
 const middleware = applyMiddleware(tasksMiddleware);
 
 const store = createStore(
