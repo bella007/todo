@@ -25,14 +25,12 @@ export default ({
 
         }
     ],
-    all_users: [
+    users: [
         {
             login:'user1'
-
         },
         {
             login:'user2'
-
         }
     ]
 });

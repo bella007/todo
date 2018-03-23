@@ -6,4 +6,4 @@ export const editTask = (payload) => ({type: types.EDITED_TASK, payload});
 export const checkedTask = (payload) => ({type: types.CHECKED_TASK, payload});
 
 
-export const user = (payload) => ({type: types.USERS, payload});
+export const getAllUsers = (payload) => ({type: types.GET_ALL_USERS, payload});

@@ -3,7 +3,7 @@ import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
 import {red500} from 'material-ui/styles/colors';
-import '../App.css';
+import '../../App.css';
 import EditableTask from './EditableTask'
 
 const iconStyles = {
