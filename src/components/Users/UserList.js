@@ -20,9 +20,10 @@ const mapDispatchToProps = dispatch => ( bindActionCreators({getAllUsers}, dispa
 
 class UserList extends Component {
 
-    // componentWillMount = () => {
-    //     fetchUsers();
-    // };
+    componentWillMount = () => {
+            console.log('COMPONENT WILL MOUNT')
+        // fetchUsers();
+    };
 
     render() {
         return (

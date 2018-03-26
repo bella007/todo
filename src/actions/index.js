@@ -7,3 +7,4 @@ export const checkedTask = (payload) => ({type: types.CHECKED_TASK, payload});
 
 
 export const getAllUsers = (payload) => ({type: types.GET_ALL_USERS, payload});
+
