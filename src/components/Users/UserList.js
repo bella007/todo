@@ -7,8 +7,8 @@ import User from './User'
 
 import {withRouter} from 'react-router';
 
-import {getAllUsers} from '../../actions';
-import fetchUsers from '../../function/fetchUsers'
+import {getAllUsers, fetchUsers} from '../../actions';
+// import fetchUsers from '../../function/fetchUsers'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -16,12 +16,13 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({getAllUsers}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({getAllUsers, fetchUsers}, dispatch) );
 
 class UserList extends Component {
 
     componentWillMount = () => {
-            console.log('COMPONENT WILL MOUNT')
+        console.log('COMPONENT WILL MOUNT')
+        this.props.fetchUsers()
         // fetchUsers();
     };
 

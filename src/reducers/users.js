@@ -11,6 +11,16 @@ export default function users(state = initial, action) {
         case types.GET_ALL_USERS:
             return payload;
 
+        case types.USERS_REQUEST:
+            return [...state];
+
+        case types.USERS_SUCCESS:
+            // console.log('payloadpayload',payload);
+            return [...payload];
+
+        case types.USERS_FAILURE:
+            return [...state];
+
         default:
             return state;
     }

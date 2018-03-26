@@ -8,7 +8,7 @@ class Hello extends Component {
     }
     componentWillMount = () => {
         console.log('componentWillMount');
-        fetchUsers();
+        // fetchUsers();
     };
     render() {
         return (
