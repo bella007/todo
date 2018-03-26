@@ -7,8 +7,8 @@ function uniq_id() {
         .substring(1);
 }
 
-// const initial = JSON.parse(localStorage.getItem('tasks')) || InitialState.tasks;
-const initial = InitialState.tasks;
+const initial = JSON.parse(localStorage.getItem('tasks')) || InitialState.tasks;
+// const initial = InitialState.tasks;
 
 export default function tasks(state = initial, action) {
     let {type, payload} = action;
