@@ -24,5 +24,3 @@ export const fetchUsers = () => dispatch => {
         })
         .catch(err => users_failure())
 };
-
-

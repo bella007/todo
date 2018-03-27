@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {List} from 'material-ui/List';
+
 
 import '../../App.css';
 import Task from './Task'
@@ -10,6 +10,11 @@ import {withRouter} from 'react-router';
 
 import {addTask, delTask, editTask, checkedTask,} from '../../actions';
 
+// let filters = {
+//     '/': (item, index) => item,
+//     '/active': (item, index) => (!item.done),
+//     '/completed': (item, index) => (item.done),
+// };
 let filters = {
     '/TaskList': (item, index) => item,
     '/TaskList/active': (item, index) => (!item.done),
@@ -18,7 +23,6 @@ let filters = {
 
 const mapStateToProps = (state, ownProps) => {
     let filter_params = ownProps.location.pathname;
-    console.log('ownProps',ownProps)
     return {
         tasks: state.tasks.filter(filters[filter_params])
     }
@@ -34,7 +38,7 @@ const tab_style = {
 class TaskList extends Component {
 
     handleOnKeyDown = (e) => {
-        // this.props.history.push(`TaskList`);
+        // this.props.history.push(`${e.target.value}`);
         this.props.history.push(`TaskList/${e.target.value}`);
     };
 
@@ -43,17 +47,15 @@ class TaskList extends Component {
         return (
             <div style={tab_style}>
                 <AddTask/>
-                <List>
-                    {this.props.tasks.map((item, index) => (
-                        < Task data={item}
-                               index={index}
-                               key={index}
-                               delete={this.props.delTask}
-                               edit={this.props.editTask}
-                               checked={this.props.checkedTask}
-                        />
-                    ))}
-                </List>
+                {this.props.tasks.map((item, index) => (
+                    < Task data={item}
+                           index={index}
+                           key={index}
+                           delete={this.props.delTask}
+                           edit={this.props.editTask}
+                           checked={this.props.checkedTask}
+                    />
+                ))}
                 <button onClick={this.handleOnKeyDown} value="">All</button>
                 <button onClick={this.handleOnKeyDown} value="active">Active</button>
                 <button onClick={this.handleOnKeyDown} value="completed">Completed</button>
