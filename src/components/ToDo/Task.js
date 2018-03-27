@@ -22,6 +22,7 @@ class Task extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            editable: false,
             input_val: this.props.data.title,
         }
     }
@@ -29,12 +30,27 @@ class Task extends Component {
     componentWillReceiveProps = (nextProps) => {
         this.setState({input_val: nextProps.data.title})
     };
+    componentWillMount = () => {
+        this.setState({editable: false})
+    };
     handleDelete = () => (
         this.props.delete(this.props.data.id)
     );
     handleChangeState = () => (
         this.props.checked(this.props.data.id)
     );
+
+    handleEditToggle = () => {
+        this.setState({editable: !this.state.editable,});
+    };
+    handleSubmitEdit = () => {
+        this.props.edit({data: this.props.data, input_val: this.state.input_val});
+        this.handleEditToggle()
+    };
+    handleChangeInput = (e) => (
+        this.setState({input_val: e.target.value})
+    );
+
 
 //TODO: 1) сделай отдельным компонентом див который показывается в режиме редактирования
     render() {
