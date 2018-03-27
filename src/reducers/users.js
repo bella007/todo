@@ -21,6 +21,18 @@ export default function users(state = initial, action) {
         case types.USERS_FAILURE:
             return [...state];
 
+        case types.EDIT_USER_FIELD:
+            return state.map((user)=> {
+                if(user.id===payload.user_id){
+                    return Object.assign({}, user, {
+                        [payload.key_field]: payload.value_field
+                    })
+                }
+                return user
+            });
+
+
+
         default:
             return state;
     }

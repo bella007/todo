@@ -1,37 +1,36 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ListItem} from 'material-ui/List';
-import {List} from 'material-ui/List';
 
 const mapStateToProps = (state, ownProps) => {
     console.log('ownProps', ownProps);
     return {
-        user: state.users.filter((item) => (item.id == ownProps.match.params.id))[0]
+        user: ownProps.user
     }
 };
 
 class EditUser extends Component {
     constructor(props) {
         super(props);
-        this.state ={
-            field_value: null,
-            // field_value: this.props.user[key]
+        this.state = {
+            field_value: this.props.user[this.props.key_field]
         }
     }
 
-    userEdit = () => {
-        // this.props.history.push(`UserList/user/edit${this.props.data.id}`);
-    };
     handleChangeInput = (e) => (
-        this.setState({input_val: e.target.value})
+        this.setState({field_value: e.target.value})
     );
-    handleSave = (e) => (
-        console.log('handleSave from EditUser component')
-    );
+    handleSave = (e) => {
+        this.props.editt({
+            user_id: this.props.user.id,
+            key_field: this.props.key_field,
+            value_field: this.state.field_value
+        })
+    };
+
     render() {
         return (
-            <div>
-                {/*<span>{key}:</span>*/}
+            <div onDoubleClick={()=>this.props.userEdit()}>
+                <span>{this.props.key_field}:</span>
                 <input autoFocus={true}
                        value={this.state.field_value}
                        onBlur={this.handleSave}

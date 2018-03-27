@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import  React, {Component} from 'react';
 import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
@@ -51,8 +51,6 @@ class Task extends Component {
         this.setState({input_val: e.target.value})
     );
 
-
-//TODO: 1) сделай отдельным компонентом див который показывается в режиме редактирования
     render() {
         return (
             <div>

@@ -9,3 +9,5 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const USERS_REQUEST = 'USER_REQUEST';
 export const USERS_SUCCESS = 'USER_SUCCESS';
 export const USERS_FAILURE = 'USER_FAILURE';
+
+export const EDIT_USER_FIELD = 'EDIT_USER_FIELD';

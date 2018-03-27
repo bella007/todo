@@ -10,11 +10,6 @@ import {withRouter} from 'react-router';
 
 import {addTask, delTask, editTask, checkedTask,} from '../../actions';
 
-// let filters = {
-//     '/': (item, index) => item,
-//     '/active': (item, index) => (!item.done),
-//     '/completed': (item, index) => (item.done),
-// };
 let filters = {
     '/TaskList': (item, index) => item,
     '/TaskList/active': (item, index) => (!item.done),
@@ -38,7 +33,6 @@ const tab_style = {
 class TaskList extends Component {
 
     handleOnKeyDown = (e) => {
-        // this.props.history.push(`${e.target.value}`);
         this.props.history.push(`TaskList/${e.target.value}`);
     };
 

@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {ListItem} from 'material-ui/List';
 import {List} from 'material-ui/List';
 import EditUser from "./EditUser";
+import {edit_user_field} from '../../actions';
+import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state, ownProps) => {
     console.log('ownProps', ownProps);
@@ -10,6 +12,8 @@ const mapStateToProps = (state, ownProps) => {
         user: state.users.filter((item) => (item.id == ownProps.match.params.id))[0]
     }
 };
+
+const mapDispatchToProps = dispatch => ( bindActionCreators({edit_user_field}, dispatch) );
 
 class ViewUser extends Component {
     constructor(props) {
@@ -20,14 +24,10 @@ class ViewUser extends Component {
     }
 
     userEdit = (key) => {
-        this.setState({editable: key});
-
+        key ?
+        this.setState({editable: key})
+            :this.setState({editable: false})
     };
-    handleCancel = () => (this.setState({editable: !this.state.editable}));
-    // handleSave = () => {
-    //     // this.props.edit({data: this.props.data, input_val: this.state.input_val});
-    //     console.log('edited')
-    // };
 
     render() {
         return (
@@ -36,12 +36,13 @@ class ViewUser extends Component {
                     {(Object.keys(this.props.user)).map((key, index) => (
 
                         <ListItem key={index}>
-                            {/*{this.state.editable !== key ?*/}
-                                {/**/}
-                                {/*: <EditUser user={this.props.user}*/}
-                                            {/*key={key}/>*/}
-                            {/*}*/}
-                            <div>{key}:{this.props.user[key]}</div>
+                            {this.state.editable === 'id' ||this.state.editable !== key ?
+                                <div onDoubleClick={() => this.userEdit(key)}>{key}:{this.props.user[key]}</div>
+                                : <EditUser user={this.props.user}
+                                            key_field={key}
+                                            editt={this.props.edit_user_field}
+                                            userEdit={this.userEdit}/>
+                            }
                         </ListItem>
                     ))}
                 </List>
@@ -50,4 +51,4 @@ class ViewUser extends Component {
     }
 }
 
-export default connect(mapStateToProps)(ViewUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewUser);

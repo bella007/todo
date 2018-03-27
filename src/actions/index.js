@@ -12,6 +12,8 @@ export const users_request = (payload) => ({type: types.USERS_REQUEST, payload})
 export const users_success = (payload) => ({type: types.USERS_SUCCESS, payload});
 export const users_failure = (payload) => ({type: types.USERS_FAILURE, payload});
 
+export const edit_user_field = (payload) => ({type: types.EDIT_USER_FIELD, payload});
+
 
 export const fetchUsers = () => dispatch => {
     dispatch(users_request());
@@ -22,5 +24,8 @@ export const fetchUsers = () => dispatch => {
             // console.log('res from actions', json)
             dispatch(users_success(json))
         })
-        .catch(err => users_failure())
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+        // .catch(err => users_failure())
 };
