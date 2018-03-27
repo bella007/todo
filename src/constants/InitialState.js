@@ -25,12 +25,5 @@ export default ({
 
         }
     ],
-    users: [
-        {
-            login:'user1'
-        },
-        {
-            login:'user2'
-        }
-    ]
+    users: []
 });

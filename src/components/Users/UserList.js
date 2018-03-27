@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import {List} from 'material-ui/List';
 import User from './User'
-
+import {fetchUsers} from '../../actions';
 import {withRouter} from 'react-router';
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,8 +13,14 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
+const mapDispatchToProps = dispatch => ( bindActionCreators({ fetchUsers}, dispatch) );
 
 class UserList extends Component {
+
+    componentDidMount = () => {
+        this.props.users.length ===0 ?
+        this.props.fetchUsers(): this.props.users
+    };
 
     render() {
         return (
@@ -26,4 +33,4 @@ class UserList extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(UserList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserList));
