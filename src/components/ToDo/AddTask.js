@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import '../App.css';
+import '../../App.css';
 
-import {addTask} from '../actions';
+import {addTask} from '../../actions';
 
 const mapDispatchToProps = dispatch => ( bindActionCreators({addTask}, dispatch) );
 

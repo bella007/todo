@@ -8,6 +8,7 @@ function uniq_id() {
 }
 
 const initial = JSON.parse(localStorage.getItem('tasks')) || InitialState.tasks;
+// const initial = InitialState.tasks;
 
 export default function tasks(state = initial, action) {
     let {type, payload} = action;

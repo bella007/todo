@@ -3,10 +3,9 @@ import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
 import {red500} from 'material-ui/styles/colors';
-import '../App.css';
+import '../../App.css';
+import DisplayTask from './DisplayTask'
 import EditableTask from './EditableTask'
-import EditableTask2 from './EditableTask2'
-import UneditableTask from './UneditableTask'
 
 const iconStyles = {
     marginRight: 24,
@@ -23,7 +22,6 @@ class Task extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editable: false,
             input_val: this.props.data.title,
         }
     }
@@ -31,25 +29,11 @@ class Task extends Component {
     componentWillReceiveProps = (nextProps) => {
         this.setState({input_val: nextProps.data.title})
     };
-    componentWillMount = () => {
-        this.setState({editable: false})
-    };
     handleDelete = () => (
         this.props.delete(this.props.data.id)
     );
     handleChangeState = () => (
         this.props.checked(this.props.data.id)
-    );
-
-    handleEditToggle = () => {
-        this.setState({editable: !this.state.editable,});
-    };
-    handleSubmitEdit = () => {
-        this.props.edit({data: this.props.data, input_val: this.state.input_val});
-        this.handleEditToggle()
-    };
-    handleChangeInput = (e) => (
-        this.setState({input_val: e.target.value})
     );
 
 //TODO: 1) сделай отдельным компонентом див который показывается в режиме редактирования
@@ -61,11 +45,11 @@ class Task extends Component {
                                            onClick={this.handleDelete}/>}
                 >
 
-                    <UneditableTask editable={this.state.editable}
+                    <DisplayTask editable={this.state.editable}
                                     edit={this.handleEditToggle}
                                     data={this.props.data}
                     />
-                    <EditableTask2 editable={this.state.editable}
+                    <EditableTask editable={this.state.editable}
                                    input_val={this.state.input_val}
                                    handleChangeInput={this.handleChangeInput}
                                    handleSubmitEdit={this.handleSubmitEdit}
@@ -80,7 +64,7 @@ class Task extends Component {
                 </ListItem>
 
             </div>
-        )
+        );
     }
 }
 

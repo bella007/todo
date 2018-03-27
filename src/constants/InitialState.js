@@ -24,5 +24,13 @@ export default ({
             id: 1,
 
         }
+    ],
+    users: [
+        {
+            login:'user1'
+        },
+        {
+            login:'user2'
+        }
     ]
 });
