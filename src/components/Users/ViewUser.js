@@ -40,7 +40,7 @@ class ViewUser extends Component {
                                 <div onDoubleClick={() => this.userEdit(key)}>{key}:{this.props.user[key]}</div>
                                 : <EditUser user={this.props.user}
                                             key_field={key}
-                                            editt={this.props.edit_user_field}
+                                            edit_user_field={this.props.edit_user_field}
                                             userEdit={this.userEdit}/>
                             }
                         </ListItem>
