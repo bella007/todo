@@ -6,7 +6,7 @@ import Hello from './components/Hello'
 import UserList from './components/Users/UserList'
 import ViewUser from './components/Users/ViewUser'
 import EditUser from './components/Users/EditUser'
-import {Link, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 class App extends Component {
 

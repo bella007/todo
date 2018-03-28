@@ -12,14 +12,14 @@ export default function users(state = initial, action) {
             return payload;
 
         case types.USERS_REQUEST:
-            console.log('reducerreducerreducer',payload);
             return [...state];
 
         case types.USERS_SUCCESS:
-            console.log('payloadpayload',payload);
+            console.log('USERS_SUCCESS USERS_SUCCESS USERS_SUCCESS',payload);
             return [...payload];
 
         case types.USERS_FAILURE:
+            console.log('FAILFAILFAILFAILFAILFAILFAIL',payload);
             return [...state];
 
         case types.EDIT_USER_FIELD:

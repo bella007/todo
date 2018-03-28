@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducers from '../reducers';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from '../sagas'
 
@@ -36,7 +36,7 @@ const tasksMiddleware = store => next => (action) => {
     }
     else if (action.type === USERS_SUCCESS || action.type === EDIT_USER_FIELD) {
         next(action);
-        // localStorage.setItem('users', JSON.stringify(store.getState().users));
+        localStorage.setItem('users', JSON.stringify(store.getState().users));
     }
     next(action);
 
