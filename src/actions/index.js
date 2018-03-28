@@ -8,24 +8,24 @@ export const checkedTask = (payload) => ({type: types.CHECKED_TASK, payload});
 
 export const getAllUsers = (payload) => ({type: types.GET_ALL_USERS, payload});
 
-export const users_request = (payload) => ({type: types.USERS_REQUEST, payload});
+export const users_request = (payload) => {console.log('payload from actionssss', payload); return{type: types.USERS_REQUEST, payload}};
 export const users_success = (payload) => ({type: types.USERS_SUCCESS, payload});
 export const users_failure = (payload) => ({type: types.USERS_FAILURE, payload});
 
 export const edit_user_field = (payload) => ({type: types.EDIT_USER_FIELD, payload});
 
 
-export const fetchUsers = () => dispatch => {
-    dispatch(users_request());
-    console.log('dispatch', dispatch)
-    return fetch(`https://api.github.com/users?since=135`)
-        .then(response => response.json())
-        .then(json => {
-            // console.log('res from actions', json)
-            dispatch(users_success(json))
-        })
-        .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-        });
-        // .catch(err => users_failure())
-};
+// export const fetchUsers = () => dispatch => {
+//     dispatch(users_request());
+//     console.log('dispatch', dispatch)
+//     return fetch(`https://api.github.com/users?since=135`)
+//         .then(response => response.json())
+//         .then(json => {
+//             // console.log('res from actions', json)
+//             dispatch(users_success(json))
+//         })
+//         .catch(function(err) {
+//             console.log('Fetch Error :-S', err);
+//         });
+//         // .catch(err => users_failure())
+// };

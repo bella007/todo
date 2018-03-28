@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 
 import {List} from 'material-ui/List';
 import User from './User'
-import {fetchUsers} from '../../actions';
+import {users_request} from '../../actions';
 import {withRouter} from 'react-router';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,13 +13,16 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({ fetchUsers}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({users_request}, dispatch) );
 
 class UserList extends Component {
 
     componentDidMount = () => {
-        this.props.users.length ===0 ?
-        this.props.fetchUsers(): this.props.users
+        // this.props.users.length === 0 ?
+        //     this.props.users_request()
+        //     : this.props.users
+        console.log('component did mount')
+        this.props.users_request()
     };
 
     render() {

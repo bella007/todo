@@ -1,7 +1,9 @@
 import {createStore, applyMiddleware} from 'redux';
 import reducers from '../reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from '../sagas'
 
 import {ADD_TASK, DEL_TASK, CHECKED_TASK, EDITED_TASK, USERS_SUCCESS, EDIT_USER_FIELD} from '../constants/ActionTypes';
 
@@ -32,19 +34,22 @@ const tasksMiddleware = store => next => (action) => {
         localStorage.setItem('tasks', JSON.stringify(store.getState().tasks));
         return;
     }
-    else if (action.type === USERS_SUCCESS || action.type === EDIT_USER_FIELD){
+    else if (action.type === USERS_SUCCESS || action.type === EDIT_USER_FIELD) {
         next(action);
-        localStorage.setItem('users', JSON.stringify(store.getState().users));
+        // localStorage.setItem('users', JSON.stringify(store.getState().users));
     }
     next(action);
 
 };
 
-// const middleware = applyMiddleware(tasksMiddleware);
-const middleware = applyMiddleware(thunk ,tasksMiddleware);
+const sagaMiddleware = createSagaMiddleware();
+
+const middleware = applyMiddleware(sagaMiddleware, tasksMiddleware);
+// const middleware = applyMiddleware(thunk ,tasksMiddleware);
 
 const store = createStore(
     reducers, middleware);
 // reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), middleware);
 export default store;
 
+sagaMiddleware.run(rootSaga);
