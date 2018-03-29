@@ -1,21 +1,22 @@
-import { call ,put, takeEvery, all} from 'redux-saga/effects'
-import {fetchData} from './api';
+import {call, put, takeEvery, all} from 'redux-saga/effects'
 
-export function* fetchUsers() {
-    try {
-        const response = yield call(fetchData);
-
-        yield put({type: "USERS_SUCCESS", payload:response});
-    } catch (error) {
-        yield put({type: "USERS_FAILURE", error})
-    }
+function fetchProductsApi() {
+    return fetch('https://api.github.com/users?since=135')
+        .then(response => (response.json()))
+        .then(response => ({response: response, error: null}))
+        .catch(error => ({response: null, error: error}))
 }
-export function* watchFetchData() {
-    yield takeEvery('USERS_REQUEST', fetchUsers)
+
+function* fetchUsers() {
+    const {response, error} = yield call(fetchProductsApi);
+    if (response)
+        yield put({type: "USERS_SUCCESS", payload: response});
+    else
+        yield put({type: "USERS_FAILURE", error})
 }
 
 export default function* rootSaga() {
     yield all([
-        watchFetchData(),
+        fetchUsers()
     ])
 }

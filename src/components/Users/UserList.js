@@ -21,8 +21,6 @@ class UserList extends Component {
         this.props.users.length === 0 ?
             this.props.users_request()
             : this.props.users
-        // console.log('component did mount');
-        // this.props.users_request()
     };
 
     render() {

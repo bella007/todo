@@ -7,7 +7,6 @@ import {edit_user_field} from '../../actions';
 import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state, ownProps) => {
-    console.log('ownProps', ownProps);
     return {
         user: state.users.filter((item) => (item.id == ownProps.match.params.id))[0]
     }

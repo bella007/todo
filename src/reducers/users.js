@@ -15,23 +15,20 @@ export default function users(state = initial, action) {
             return [...state];
 
         case types.USERS_SUCCESS:
-            console.log('USERS_SUCCESS USERS_SUCCESS USERS_SUCCESS',payload);
             return [...payload];
 
         case types.USERS_FAILURE:
-            console.log('FAILFAILFAILFAILFAILFAILFAIL',payload);
             return [...state];
 
         case types.EDIT_USER_FIELD:
-            return state.map((user)=> {
-                if(user.id===payload.user_id){
+            return state.map((user) => {
+                if (user.id === payload.user_id) {
                     return Object.assign({}, user, {
                         [payload.key_field]: payload.value_field
                     })
                 }
                 return user
             });
-
 
 
         default:

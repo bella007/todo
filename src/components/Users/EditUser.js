@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    console.log('ownProps', ownProps);
     return {
         user: ownProps.user
     }
