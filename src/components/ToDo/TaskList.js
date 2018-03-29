@@ -12,6 +12,7 @@ import {addTask, delTask, editTask, checkedTask,} from '../../actions';
 
 let filters = {
     '/TaskList': (item, index) => item,
+    '/TaskList/': (item, index) => item,
     '/TaskList/active': (item, index) => (!item.done),
     '/TaskList/completed': (item, index) => (item.done),
 };
@@ -33,7 +34,7 @@ const tab_style = {
 class TaskList extends Component {
 
     handleOnKeyDown = (e) => {
-        this.props.history.push(`TaskList/${e.target.value}`);
+        this.props.history.push(`/TaskList${e.target.value ? '/' + e.target.value : ''}`);
     };
 
 
