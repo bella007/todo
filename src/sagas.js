@@ -15,8 +15,12 @@ function* fetchUsers() {
         yield put({type: "USERS_FAILURE", error})
 }
 
+export function* watchFetchData() {
+    yield takeEvery('USERS_REQUEST', fetchUsers)
+}
+
 export default function* rootSaga() {
     yield all([
-        fetchUsers()
+        watchFetchData(),
     ])
 }
