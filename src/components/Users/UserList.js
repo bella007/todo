@@ -18,11 +18,11 @@ const mapDispatchToProps = dispatch => ( bindActionCreators({users_request}, dis
 class UserList extends Component {
 
     componentDidMount = () => {
-        // this.props.users.length === 0 ?
-        //     this.props.users_request()
-        //     : this.props.users
-        console.log('component did mount')
-        this.props.users_request()
+        this.props.users.length === 0 ?
+            this.props.users_request()
+            : this.props.users
+        // console.log('component did mount');
+        // this.props.users_request()
     };
 
     render() {

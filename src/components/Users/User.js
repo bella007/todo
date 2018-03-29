@@ -10,9 +10,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 class User extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     handleEdit = () => {
         this.props.history.push(`UserList/user/${this.props.data.id}`);
