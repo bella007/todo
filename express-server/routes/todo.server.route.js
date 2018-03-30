@@ -7,8 +7,10 @@ import * as todoController from '../controllers/todo.server.controller';
 // get an instance of express router
 const router = express.Router();
 
-router.route('/')
-     .get(todoController.getTodos)
-     .post(todoController.addTodo)
+// router.route('/')
+//      .get(todoController.getTodos)
+//      .post(todoController.addTodo)
+
+
 
 export default router;

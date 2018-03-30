@@ -18,20 +18,26 @@ function* fetchUsers() {
 export function* watchFetchData() {
     yield takeEvery('USERS_REQUEST', fetchUsers)
 }
-const apiUrl = " /TaskList/";
+const apiUrl = "http://localhost:3001/task-list";
 
 function fetchAddTasks(payload) {
+    console.log("fetchind",apiUrl, payload );
+
+    // return fetch(apiUrl)
+    //     .then(response => (response.json()))
+    //     .then(response => {console.log('responseeeeeeeeeeeeee',response)})
+    //     .catch(error => ({response: null, error: error}))
+
     return fetch(apiUrl, {
-        method: 'post',
+        method: 'POST',
         headers: {
-            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-        .then(res => {console.log(res);return res.json()})
+        // .then(res => {console.log(res);return res.json()})
         // .then(res => console.log(res))
-        .catch(error => (console.log('errorerrorerrorerrorerrorerror', error)))
+       // .catch(error => (console.log('errorerrorerrorerrorerrorerror', error)))
 }
 
 function* AddTasks(act) {

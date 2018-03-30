@@ -1,5 +1,5 @@
 // ./express-server/app.js
-import express from 'express';
+const express = require('express');
 import path from 'path';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
@@ -17,11 +17,20 @@ const app = express();
 bb.extend(app);
 
 // allow-cors
-app.use(function(req,res,next){
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-})
+// app.use(function(req,res,next){
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// })
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, content-type, Access-Control-Allow-Origin');
+    res.header('Access-Control-Allow-Credentials', true);
+    if ('OPTIONS' == req.method)
+        return res.sendStatus(204);
+    next();
+});
 
 
 // configure app
@@ -43,11 +52,20 @@ mongoose.connect('mongodb://admin:123@ds041484.mlab.com:41484/todo_listtt', {
 // add Source Map Support
 SourceMapSupport.install();
 
-app.use('/TaskList', todoRoutes);
+// app.use('/', todoRoutes);
 
 app.get('/', (req,res) => {
+  console.log("req", req.body)
   return res.end('Api WORKING');
 })
+
+
+app.post("/task-list", (req, res, next) => {
+    console.log("req", req.body)
+    return res.end('Api POST WORKING');
+} );
+
+
 
 // catch 404
 app.use((req, res, next) => {
