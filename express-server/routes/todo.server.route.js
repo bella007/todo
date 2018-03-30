@@ -10,6 +10,5 @@ const router = express.Router();
 router.route('/')
      .get(todoController.getTodos)
      .post(todoController.addTodo)
-     .put(todoController.updateTodo);
 
 export default router;

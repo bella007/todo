@@ -43,7 +43,7 @@ mongoose.connect('mongodb://admin:123@ds041484.mlab.com:41484/todo_listtt', {
 // add Source Map Support
 SourceMapSupport.install();
 
-app.use('/api', todoRoutes);
+app.use('/TaskList', todoRoutes);
 
 app.get('/', (req,res) => {
   return res.end('Api WORKING');

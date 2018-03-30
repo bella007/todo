@@ -18,6 +18,7 @@ export default function tasks(state = initial, action) {
             let task_id = uniq_id();
             let new_task = {...payload, done: false, id: (state[task_id] ? uniq_id() : task_id)};
             return [new_task, ...state];
+
         case types.DEL_TASK:
             return state.filter(item => item.id !== payload);
 

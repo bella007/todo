@@ -18,9 +18,39 @@ function* fetchUsers() {
 export function* watchFetchData() {
     yield takeEvery('USERS_REQUEST', fetchUsers)
 }
+const apiUrl = " /TaskList/";
+
+function fetchAddTasks(payload) {
+    return fetch(apiUrl, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+        .then(res => {console.log(res);return res.json()})
+        // .then(res => console.log(res))
+        .catch(error => (console.log('errorerrorerrorerrorerrorerror', error)))
+}
+
+function* AddTasks(act) {
+    let new_task={...act.payload,  done: false, id:5};
+    console.log(new_task)
+    const {response, error} = yield call(fetchAddTasks, new_task);
+    if (response)
+        yield put({type: "TASKS_ADD_SUCCESS", payload: response});
+    else
+        yield put({type: "TASKS_ADD_FAILURE", error})
+}
+
+export function* watchAddUser() {
+    yield takeEvery('TASKS_ADD_REQUEST', AddTasks)
+}
 
 export default function* rootSaga() {
     yield all([
         watchFetchData(),
+        watchAddUser()
     ])
-}
+};

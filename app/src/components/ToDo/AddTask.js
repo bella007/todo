@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import '../../App.css';
 
-import {addTask} from '../../actions';
+import {addTask, tasks_add_request} from '../../actions';
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({addTask}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({addTask, tasks_add_request}, dispatch) );
 
 class AddTask extends Component {
 
@@ -26,9 +26,13 @@ class AddTask extends Component {
                 title: this.state.changed_task,
             };
             this.props.addTask(new_task);
+            this.props.tasks_add_request(new_task);
         }
 
         this.setState({changed_task: ''});
+
+
+
     };
 
     handleChange(e) {
