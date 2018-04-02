@@ -13,9 +13,9 @@ export const users_request = (payload) => ({type: types.USERS_REQUEST, payload})
 export const users_success = (payload) => ({type: types.USERS_SUCCESS, payload});
 export const users_failure = (payload) => ({type: types.USERS_FAILURE, payload});
 
-export const all_tasks_request = (payload) => ({type: types.ALL_TASKS_REQUEST, payload});
-export const all_tasks_success = (payload) => ({type: types.ALL_TASKS_SUCCESS, payload});
-export const all_tasks_failure = (payload) => ({type: types.ALL_TASKS_FAILURE, payload});
+export const tasks_request = (payload) => ({type: types.TASKS_REQUEST, payload});
+export const tasks_success = (payload) => ({type: types.TASKS_SUCCESS, payload});
+export const tasks_failure = (payload) => ({type: types.TASKS_FAILURE, payload});
 
 export const tasks_add_request = (payload) => ({type: types.TASKS_ADD_REQUEST, payload});
 export const tasks_add_success = (payload) => ({type: types.TASKS_ADD_SUCCESS, payload});
