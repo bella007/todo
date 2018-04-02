@@ -26,14 +26,21 @@ function fetchAddTasks(payload) {
 
     return fetch(apiUrl, {
         method: 'POST',
-        headers: {
-        },
+        // headers: {
+        //     // 'Content-Type': 'application/json',
+        // },
         body: JSON.stringify(payload)
     })
-        // .then(res =>{console.log('resresresresres', res);res.json()})
-        .catch(error => (console.log('errorerrorerrorerrorerrorerror', error)));
+        .then(response => JSON.stringify(response))
+        .then(response => {
+            console.log('response', response);
+            return {response: response, error: null}
+        })
+        .catch(error => {
+            console.log('error', error);
+            return {response: null, error: error}
+        })
 }
-
 
 function* AddTasks(act) {
     let new_task = {...act.payload, done: false, id: 5};

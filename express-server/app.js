@@ -61,17 +61,17 @@ mongoose.connect('mongodb://admin:123@ds041484.mlab.com:41484/todo_listtt', {
 
 SourceMapSupport.install();
 
-app.use('/task-list', todoRoutes);
+// app.use('/task-list', todoRoutes);
 
 app.get('/', (req, res) => {
     console.log("req", req.body);
     return res.end('Api WORKING');
 });
 
-// app.post("/task-list", (req, res, next) => {
-//     console.log( 'workiuiiiiiiiiiiiiiiiiiiiing', "req", req.body,);
-//     res.end('task-list working');
-// });
+app.post("/task-list", (req, res, next) => {
+    console.log( 'request.body in app.js', "req", req.body);
+    res.end('task-list working');
+});
 
 
 // catch 404
