@@ -26,9 +26,7 @@ function fetchAddTasks(payload) {
 
     return fetch(apiUrl, {
         method: 'POST',
-        // headers: {
-        //     // 'Content-Type': 'application/json',
-        // },
+        headers: {'Content-Type': 'application/json',},
         body: JSON.stringify(payload)
     })
         .then(response => JSON.stringify(response))
@@ -46,6 +44,7 @@ function* AddTasks(act) {
     let new_task = {...act.payload, done: false, id: 5};
     const {response, error} = yield call(fetchAddTasks, new_task);
     if (response)
+        // TODO: make working reducers for both cases
         yield put({type: "TASKS_ADD_SUCCESS", payload: response});
     else
         yield put({type: "TASKS_ADD_FAILURE", error})

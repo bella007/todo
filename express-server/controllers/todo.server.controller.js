@@ -1,7 +1,5 @@
-// ./express-server/controllers/todo.server.controller.js
 import mongoose from 'mongoose';
 
-//import models
 import Todo from '../models/todo.server.model';
 
 export const getTodos = (req,res) => {
@@ -27,4 +25,8 @@ export const addTodo = (req,res) => {
 
     return res.json({'success':true,'message':'Todo added successfully',todo});
   })
+};
+
+export const deleteTodo = (req,res) => {
+
 };
