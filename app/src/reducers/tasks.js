@@ -1,5 +1,6 @@
 import InitialState from '../constants/InitialState';
 import * as types from '../constants/ActionTypes';
+import {TASKS_REQUEST} from "../constants/ActionTypes";
 
 function uniq_id() {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -40,6 +41,17 @@ export default function tasks(state = initial, action) {
                 }
                 return task
             });
+
+
+        case types.TASKS_REQUEST:
+            return [...state];
+
+        case types.TASKS_SUCCESS:
+            return [...payload];
+
+        case types.TASKS_FAILURE:
+            return [...state];
+
         default:
             return state;
     }
