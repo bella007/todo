@@ -18,31 +18,25 @@ function* fetchUsers() {
 export function* watchFetchData() {
     yield takeEvery('USERS_REQUEST', fetchUsers)
 }
+
 const apiUrl = "http://localhost:3001/task-list";
 
 function fetchAddTasks(payload) {
-    console.log("fetchind",apiUrl, payload );
-
-    // return fetch(apiUrl)
-    //     .then(response => (response.json()))
-    //     .then(response => {console.log('responseeeeeeeeeeeeee',response)})
-    //     .catch(error => ({response: null, error: error}))
+    console.log("fetching", apiUrl, payload);
 
     return fetch(apiUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-        // .then(res => {console.log(res);return res.json()})
-        // .then(res => console.log(res))
-       // .catch(error => (console.log('errorerrorerrorerrorerrorerror', error)))
+        // .then(res =>{console.log('resresresresres', res);res.json()})
+        .catch(error => (console.log('errorerrorerrorerrorerrorerror', error)));
 }
 
+
 function* AddTasks(act) {
-    let new_task={...act.payload,  done: false, id:5};
-    console.log(new_task)
+    let new_task = {...act.payload, done: false, id: 5};
     const {response, error} = yield call(fetchAddTasks, new_task);
     if (response)
         yield put({type: "TASKS_ADD_SUCCESS", payload: response});

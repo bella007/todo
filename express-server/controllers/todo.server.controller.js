@@ -7,7 +7,7 @@ import Todo from '../models/todo.server.model';
 export const getTodos = (req,res) => {
   Todo.find().exec((err,todos) => {
     if(err){
-      console.log('controller');
+      console.log('controllerrrrrrRRRRRRRRRRRRR');
     return res.json({'success':false,'message':'Some Error'});
     }
 
@@ -16,7 +16,8 @@ export const getTodos = (req,res) => {
 };
 
 export const addTodo = (req,res) => {
-  console.log(req.body);
+  // console.log(req.body);
+  console.log('Privet-privet');
   const newTodo = new Todo(req.body);
   newTodo.save((err,todo) => {
     if(err){
