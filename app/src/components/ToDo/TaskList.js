@@ -38,9 +38,10 @@ class TaskList extends Component {
     };
 
     componentDidMount = () => {
-        this.props.tasks.length === 0 ?
+        // this.props.tasks.length === 0 ?
+        console.log('componentDidMount')
             this.props.tasks_request()
-            : this.props.tasks
+            // : this.props.tasks
     };
 
     render() {

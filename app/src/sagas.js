@@ -19,6 +19,8 @@ export function* watchFetchData() {
     yield takeEvery('USERS_REQUEST', fetchUsers)
 }
 
+// TASKS
+
 const apiUrl = "http://localhost:3001/task-list";
 
 function fetchAddTasks(payload) {
@@ -44,7 +46,6 @@ function* AddTasks(act) {
     let new_task = {...act.payload, done: false, id: 5};
     const {response, error} = yield call(fetchAddTasks, new_task);
     if (response)
-        // TODO: make working reducers for both cases
         yield put({type: "TASKS_ADD_SUCCESS", payload: response});
     else
         yield put({type: "TASKS_ADD_FAILURE", error})
@@ -54,9 +55,32 @@ export function* watchAddUser() {
     yield takeEvery('TASKS_ADD_REQUEST', AddTasks)
 }
 
+
+
+function fetchTasks() {
+    return fetch(apiUrl)
+        .then(response => (response.json()))
+        .then(response => {console.log('sagas response', response.todos);return {response: response.todos, error: null}})
+        .catch(error => ({response: null, error: error}))
+}
+
+function* tasks() {
+    const {response, error} = yield call(fetchTasks);
+    if (response)
+        yield put({type: "TASKS_SUCCESS", payload: response});
+    else
+        yield put({type: "TASKS_FAILURE", error})
+}
+
+export function* watchTasksRequest() {
+    console.log('sagas watcher');
+    yield takeEvery('TASKS_REQUEST', tasks)
+}
+
 export default function* rootSaga() {
     yield all([
         watchFetchData(),
-        watchAddUser()
+        watchAddUser(),
+        watchTasksRequest()
     ])
 };

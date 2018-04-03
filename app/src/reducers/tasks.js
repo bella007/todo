@@ -44,6 +44,7 @@ export default function tasks(state = initial, action) {
 
 
         case types.TASKS_REQUEST:
+            console.log('reducer tasks_request')
             return [...state];
 
         case types.TASKS_SUCCESS:
