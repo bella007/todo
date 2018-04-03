@@ -24,30 +24,25 @@ export const addTodo = (req, res) => {
 };
 
 export const deleteTodo = (req, res) => {
-    console.log('mongoose.Types.ObjectId(req.params._id)', mongoose.Types.ObjectId(req.params._id))
     console.log('req.params.id', req.params.id);
-    console.log('req.params', req.params);
 
-    let element_id=mongoose.Types.ObjectId(req.params._id);
+    let element_id = mongoose.Types.ObjectId(req.params._id);
 
-    // Tod.remove({_id: element_id}, function(err) {
-    //     if(err) {console.log(err);}
-    //     else {console.log("Deleted!");}
-    // });
-
-    Todo.findByIdAndRemove(element_id, function(err) {
+    Todo.findByIdAndRemove(element_id, function (err) {
         if (err) throw err;
         console.log('Task deleted!');
     });
 
 };
-// export const deleteTodo = (req,res) => {
-//     let element_id=mongoose.Types.ObjectId(req.params._id)
-//     Too.findByIdAndRemove(element_id, (err,todo) => {
-//         if(err){
-//             console.log('err',err);
-//             return res.json({'success':false,'message':'Some Error'});
-//         }
-//         return res.json({'success':true,'message': 'deleted successfully'});
-//     })
-// };
+export const editTodo = (req, res) => {
+    req.body.data.title = req.body.input_val;
+
+
+    Todo.findOneAndUpdate({_id: req.body.data._id}, req.body.data, {title: req.body.input_val}, (err, todo) => {
+        if (err) {
+            console.log('ERROR FROM EDIT TODO')
+        }
+        console.log(todo);
+        // return res.json({'success': true, 'message': 'Updated successfully', todo});
+    })
+};

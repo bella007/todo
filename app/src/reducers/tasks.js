@@ -32,7 +32,32 @@ export default function tasks(state = initial, action) {
                 }
                 return task
             });
-        case types.EDITED_TASK:
+
+            // case types.EDITED_TASK:
+            //     return state.map(task => {
+            //         if (task._id === payload.data._id) {
+            //             return Object.assign({}, task, {
+            //                 title: payload.input_val
+            //             })
+            //         }
+            //         return task
+            //     });
+
+
+
+        case types.TASKS_SUCCESS:
+            return [...payload];
+
+        case types.TASKS_ADD_SUCCESS:
+            console.log('ADD_SUCCESS payload', payload);
+            return [...payload, ...state];
+
+        case types.TASKS_DEL_SUCCESS:
+            console.log('state', state);
+            return [...state];
+
+        case types.TASKS_EDIT_SUCCESS:
+            console.log(payload);
             return state.map(task => {
                 if (task._id === payload.data._id) {
                     return Object.assign({}, task, {
@@ -41,40 +66,6 @@ export default function tasks(state = initial, action) {
                 }
                 return task
             });
-
-
-        // case types.TASKS_REQUEST:
-        //     return [...state];
-
-        case types.TASKS_SUCCESS:
-            return [...payload];
-
-        // case types.TASKS_FAILURE:
-        //     return [...state];
-
-
-        // case types.TASKS_ADD_REQUEST:
-        //     return [...state];
-
-        case types.TASKS_ADD_SUCCESS:
-            console.log('ADD_SUCCESS payload', payload)
-            return [...payload, ...state];
-
-        // case types.TASKS_ADD_FAILURE:
-        //     return [...state];
-
-
-        case types.TASKS_DEL_REQUEST:
-            return [...state];
-
-        case types.TASKS_DEL_SUCCESS:
-            console.log('state', state)
-            return [...state];
-
-        case types.TASKS_DEL_FAILURE:
-            return [...state];
-
-
 
         default:
             return state;

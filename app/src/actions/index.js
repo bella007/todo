@@ -25,4 +25,6 @@ export const tasks_del_request = (payload) => ({type: types.TASKS_DEL_REQUEST, p
 export const tasks_del_success = (payload) => ({type: types.TASKS_DEL_SUCCESS, payload});
 export const tasks_del_failure = (payload) => ({type: types.TASKS_DEL_FAILURE, payload});
 
-
+export const tasks_edit_request = (payload) => ({type: types.TASKS_EDIT_REQUEST, payload});
+export const tasks_edit_success = (payload) => ({type: types.TASKS_EDIT_SUCCESS, payload});
+export const tasks_edit_failure = (payload) => ({type: types.TASKS_EDIT_FAILURE, payload});

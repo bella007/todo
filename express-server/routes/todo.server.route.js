@@ -5,10 +5,11 @@ import * as todoController from '../controllers/todo.server.controller';
 const router = express.Router();
 
 router.route('/')
-     .get(todoController.getTodos)
-     .post(todoController.addTodo);
+    .get(todoController.getTodos)
+    .post(todoController.addTodo);
 
 router.route('/:id')
+    .post(todoController.editTodo)
     .delete(todoController.deleteTodo);
 
 
