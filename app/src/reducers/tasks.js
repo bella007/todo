@@ -25,7 +25,7 @@ export default function tasks(state = initial, action) {
 
         case types.CHECKED_TASK:
             return state.map(task => {
-                if (task.id === payload) {
+                if (task._id === payload) {
                     return Object.assign({}, task, {
                         done: !task.done
                     })
@@ -34,7 +34,7 @@ export default function tasks(state = initial, action) {
             });
         case types.EDITED_TASK:
             return state.map(task => {
-                if (task.id === payload.data.id) {
+                if (task._id === payload.data._id) {
                     return Object.assign({}, task, {
                         title: payload.input_val
                     })
@@ -43,15 +43,38 @@ export default function tasks(state = initial, action) {
             });
 
 
-        case types.TASKS_REQUEST:
-            console.log('reducer tasks_request')
-            return [...state];
+        // case types.TASKS_REQUEST:
+        //     return [...state];
 
         case types.TASKS_SUCCESS:
             return [...payload];
 
-        case types.TASKS_FAILURE:
+        // case types.TASKS_FAILURE:
+        //     return [...state];
+
+
+        // case types.TASKS_ADD_REQUEST:
+        //     return [...state];
+
+        case types.TASKS_ADD_SUCCESS:
+            console.log('ADD_SUCCESS payload', payload)
+            return [...payload, ...state];
+
+        // case types.TASKS_ADD_FAILURE:
+        //     return [...state];
+
+
+        case types.TASKS_DEL_REQUEST:
             return [...state];
+
+        case types.TASKS_DEL_SUCCESS:
+            console.log('state', state)
+            return [...state];
+
+        case types.TASKS_DEL_FAILURE:
+            return [...state];
+
+
 
         default:
             return state;

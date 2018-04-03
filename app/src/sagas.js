@@ -23,6 +23,8 @@ export function* watchFetchData() {
 
 const apiUrl = "http://localhost:3001/task-list";
 
+// ADD TASK
+
 function fetchAddTasks(payload) {
     console.log("fetching", apiUrl, payload);
 
@@ -43,10 +45,11 @@ function fetchAddTasks(payload) {
 }
 
 function* AddTasks(act) {
-    let new_task = {...act.payload, done: false, id: 5};
+    // let new_task = {...act.payload, done: false, id: 5};
+    let new_task = {...act.payload, done: false};
     const {response, error} = yield call(fetchAddTasks, new_task);
     if (response)
-        yield put({type: "TASKS_ADD_SUCCESS", payload: response});
+        yield put({type: "TASKS_ADD_SUCCESS", payload: new_task});
     else
         yield put({type: "TASKS_ADD_FAILURE", error})
 }
@@ -56,11 +59,11 @@ export function* watchAddUser() {
 }
 
 
-
+// GET ALL TASKS
 function fetchTasks() {
     return fetch(apiUrl)
         .then(response => (response.json()))
-        .then(response => {console.log('sagas response', response.todos);return {response: response.todos, error: null}})
+        .then(response => {return {response: response.todos, error: null}})
         .catch(error => ({response: null, error: error}))
 }
 
@@ -73,14 +76,45 @@ function* tasks() {
 }
 
 export function* watchTasksRequest() {
-    console.log('sagas watcher');
     yield takeEvery('TASKS_REQUEST', tasks)
 }
+
+// DELETE TASK
+
+function fetchDelTasks(task_id) {
+
+    return fetch(`http://localhost:3001/task-list/${task_id}`, {
+    // return fetch(apiUrl+'/'+task_id, {
+        method: 'delete',
+    }).then(response => response.json())
+        .then(response => {
+            console.log('response', response);
+            return {response: response, error: null}
+        })
+        .catch(error => {
+            // console.log('error', error);
+            return {response: null, error: error}
+        })
+}
+
+function* DelTasks(task_id) {
+    const {response, error} = yield call(fetchDelTasks, task_id);
+    if (response)
+        yield put({type: "TASKS_DEL_SUCCESS", payload: response});
+    else
+        yield put({type: "TASKS_DEL_FAILURE", error})
+}
+
+export function* watchDelUser() {
+    yield takeEvery('TASKS_DEL_REQUEST', DelTasks)
+}
+
 
 export default function* rootSaga() {
     yield all([
         watchFetchData(),
         watchAddUser(),
-        watchTasksRequest()
+        watchTasksRequest(),
+        watchDelUser()
     ])
 };

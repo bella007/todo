@@ -1,4 +1,4 @@
-import  React, {Component} from 'react';
+import React, {Component} from 'react';
 import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
@@ -6,6 +6,7 @@ import {red500} from 'material-ui/styles/colors';
 import '../../App.css';
 import DisplayTask from './DisplayTask'
 import EditableTask from './EditableTask'
+import {withRouter} from 'react-router';
 
 const iconStyles = {
     marginRight: 24,
@@ -33,11 +34,12 @@ class Task extends Component {
     componentWillMount = () => {
         this.setState({editable: false})
     };
-    handleDelete = () => (
-        this.props.delete(this.props.data.id)
-    );
+    handleDelete = () => {
+        this.props.delete(this.props.data._id);
+    };
+
     handleChangeState = () => (
-        this.props.checked(this.props.data.id)
+        this.props.checked(this.props.data._id)
     );
 
     handleEditToggle = () => {
@@ -60,15 +62,15 @@ class Task extends Component {
                 >
 
                     <DisplayTask editable={this.state.editable}
-                                    edit={this.handleEditToggle}
-                                    data={this.props.data}
+                                 edit={this.handleEditToggle}
+                                 data={this.props.data}
                     />
                     <EditableTask editable={this.state.editable}
-                                   input_val={this.state.input_val}
-                                   handleChangeInput={this.handleChangeInput}
-                                   handleSubmitEdit={this.handleSubmitEdit}
-                                   edit={this.props.edit}
-                                   data={this.props.data}
+                                  input_val={this.state.input_val}
+                                  handleChangeInput={this.handleChangeInput}
+                                  handleSubmitEdit={this.handleSubmitEdit}
+                                  edit={this.props.edit}
+                                  data={this.props.data}
                     />
                     <Checkbox
                         checked={this.props.data.done}
@@ -82,4 +84,4 @@ class Task extends Component {
     }
 }
 
-export default Task;
+export default withRouter(Task);

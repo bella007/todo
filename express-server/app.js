@@ -2,7 +2,6 @@ const path = require('path'),
     express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    logger = require('morgan'),
     SourceMapSupport = require('source-map-support');
 
 
@@ -22,7 +21,6 @@ app.use(function (req, res, next) {
 
 
 
-// app.use(logger('dev'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

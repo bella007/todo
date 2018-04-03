@@ -8,7 +8,7 @@ import Task from './Task'
 import AddTask from './AddTask'
 import {withRouter} from 'react-router';
 
-import {addTask, delTask, editTask, checkedTask, tasks_request} from '../../actions';
+import {addTask, delTask, editTask, checkedTask, tasks_request,tasks_del_request} from '../../actions';
 
 let filters = {
     '/TaskList': (item, index) => item,
@@ -24,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({addTask, delTask, editTask, checkedTask, tasks_request}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({addTask, delTask, editTask, checkedTask, tasks_request, tasks_del_request}, dispatch) );
 
 const tab_style = {
     width: 400,
@@ -39,7 +39,6 @@ class TaskList extends Component {
 
     componentDidMount = () => {
         // this.props.tasks.length === 0 ?
-        console.log('componentDidMount')
             this.props.tasks_request()
             // : this.props.tasks
     };
@@ -52,7 +51,7 @@ class TaskList extends Component {
                     < Task data={item}
                            index={index}
                            key={index}
-                           delete={this.props.delTask}
+                           delete={this.props.tasks_del_request}
                            edit={this.props.editTask}
                            checked={this.props.checkedTask}
                     />
