@@ -42,7 +42,8 @@ export const editTodo = (req, res) => {
         if (err) {
             console.log('ERROR FROM EDIT TODO')
         }
+        //todo there is no return
         console.log(todo);
-        // return res.json({'success': true, 'message': 'Updated successfully', todo});
+        return res.json({'success': true, 'message': 'Updated successfully', todo});
     })
 };
