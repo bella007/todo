@@ -39,11 +39,12 @@ export const editTodo = (req, res) => {
 
 
     Todo.findOneAndUpdate({_id: req.body.data._id}, req.body.data, {title: req.body.input_val}, (err, todo) => {
-        if (err) {
-            console.log('ERROR FROM EDIT TODO')
+        if(err){
+            console.log('ERROR FROM EDIT TODO');
+            return res.json({'success':false,'message':'Some Error'});
         }
-        //todo there is no return
-        console.log(todo);
-        return res.json({'success': true, 'message': 'Updated successfully', todo});
+
+        return res.json({'success':true,'message':todo.todoText+' deleted successfully'});
     })
+
 };

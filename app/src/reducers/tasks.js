@@ -57,11 +57,11 @@ export default function tasks(state = initial, action) {
             return [...state];
 
         case types.TASKS_EDIT_SUCCESS:
-            console.log('TASKS_EDIT_SUCCESS', payload);
+            console.log('TASKS_EDIT_SUCCESS', payload.payload);
             return state.map(task => {
-                if (task._id === payload.data._id) {
+                if (task._id === payload.payload.data._id) {
                     return Object.assign({}, task, {
-                        title: payload.input_val
+                        title: payload.payload.input_val
                     })
                 }
                 return task

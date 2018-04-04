@@ -121,7 +121,6 @@ function fetchEditTasks(payload) {
     })
         .then(response => JSON.stringify(response))
         .then(response => {
-            console.log('response', response);
             return {response: response, error: null}
         })
         .catch(error => {
@@ -133,7 +132,7 @@ function fetchEditTasks(payload) {
 function* EditTasks(element) {
     console.log('payload', element.payload);
     const {response, error} = yield call(fetchEditTasks, element.payload);
-    console.log('response from edit task',response);
+    console.log('response from edit task',response, error);
     if (response)
         yield put({type: "TASKS_EDIT_SUCCESS", payload: element});
     else
