@@ -40,7 +40,7 @@ export const editTodo = (req, res) => {
             return res.json({'success':false,'message':'Some Error'});
         }
 
-        return res.json({'success':true,'message':todo.todoText+' deleted successfully'});
+        return res.json({'success':true,'message': 'EDITED'});
     })
 
 };
