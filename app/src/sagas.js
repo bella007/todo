@@ -54,8 +54,9 @@ function fetchAddTasks(payload) {
         headers: {'Content-Type': 'application/json',},
         body: JSON.stringify(payload)
     })
-        .then(response => JSON.stringify(response))
+        .then(response => response.json())
         .then(response => {
+            console.log('response after fetch', response)
             return {response: response, error: null}
         })
         .catch(error => {
@@ -67,8 +68,9 @@ function* AddTasks(act) {
     // let new_task = {...act.payload, done: false, id: 5};
     let new_task = {...act.payload, done: false};
     const {response, error} = yield call(fetchAddTasks, new_task);
+    console.log('responseee', response)
     if (response)
-        yield put({type: "TASKS_ADD_SUCCESS", payload: new_task});
+        yield put({type: "TASKS_ADD_SUCCESS", payload: response.todo});
     else
         yield put({type: "TASKS_ADD_FAILURE", error})
 }
@@ -81,7 +83,7 @@ export function* watchAddUser() {
 // DELETE TASK
 
 function fetchDelTasks(task_id) {
-
+    console.log('task_id', task_id);
     return fetch(`http://localhost:3001/task-list/${task_id}`, {
         // return fetch(apiUrl+'/'+task_id, {
         method: 'delete',
@@ -95,10 +97,11 @@ function fetchDelTasks(task_id) {
         })
 }
 
-function* DelTasks(task_id) {
-    const {response, error} = yield call(fetchDelTasks, task_id);
+function* DelTasks(element) {
+    console.log('task_id', element);
+    const {response, error} = yield call(fetchDelTasks, element.payload);
     if (response)
-        yield put({type: "TASKS_DEL_SUCCESS", payload: response});
+        yield put({type: "TASKS_DEL_SUCCESS", payload: element.payload});
     else
         yield put({type: "TASKS_DEL_FAILURE", error})
 }

@@ -39,8 +39,7 @@ export default function tasks(state = initial, action) {
             return [...payload, ...state];
 
         case types.TASKS_DEL_SUCCESS:
-            console.log('state', state);
-            return [...state];
+            return state.filter(item => item._id !== payload);
 
         case types.TASKS_EDIT_SUCCESS:
             console.log('TASKS_EDIT_SUCCESS', payload.payload);
