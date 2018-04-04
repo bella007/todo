@@ -26,7 +26,7 @@ export const addTodo = (req, res) => {
 export const deleteTodo = (req, res) => {
 
     let element_id = mongoose.Types.ObjectId(req.params._id);
-
+console.log('req', req)
     Todo.findByIdAndRemove(element_id, function (err) {
         if (err) throw err;
     });

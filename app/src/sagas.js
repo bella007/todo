@@ -85,6 +85,7 @@ function fetchDelTasks(task_id) {
     return fetch(`http://localhost:3001/task-list/${task_id}`, {
         // return fetch(apiUrl+'/'+task_id, {
         method: 'delete',
+        body: task_id
     }).then(response => response.json())
         .then(response => {
             return {response: response, error: null}
