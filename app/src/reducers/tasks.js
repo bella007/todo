@@ -1,6 +1,5 @@
 import InitialState from '../constants/InitialState';
 import * as types from '../constants/ActionTypes';
-import {TASKS_REQUEST} from "../constants/ActionTypes";
 
 function uniq_id() {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -9,7 +8,6 @@ function uniq_id() {
 }
 
 const initial = JSON.parse(localStorage.getItem('tasks')) || InitialState.tasks;
-// const initial = InitialState.tasks;
 
 export default function tasks(state = initial, action) {
     let {type, payload} = action;
@@ -32,18 +30,6 @@ export default function tasks(state = initial, action) {
                 }
                 return task
             });
-
-            // case types.EDITED_TASK:
-            //     return state.map(task => {
-            //         if (task._id === payload.data._id) {
-            //             return Object.assign({}, task, {
-            //                 title: payload.input_val
-            //             })
-            //         }
-            //         return task
-            //     });
-
-
 
         case types.TASKS_SUCCESS:
             return [...payload];

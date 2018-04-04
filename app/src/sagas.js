@@ -48,7 +48,6 @@ export function* watchTasksRequest() {
 // ADD TASK
 
 function fetchAddTasks(payload) {
-    console.log("fetching", apiUrl, payload);
 
     return fetch(apiUrl, {
         method: 'POST',
@@ -57,11 +56,9 @@ function fetchAddTasks(payload) {
     })
         .then(response => JSON.stringify(response))
         .then(response => {
-            console.log('response', response);
             return {response: response, error: null}
         })
         .catch(error => {
-            console.log('error', error);
             return {response: null, error: error}
         })
 }
@@ -90,11 +87,9 @@ function fetchDelTasks(task_id) {
         method: 'delete',
     }).then(response => response.json())
         .then(response => {
-            console.log('response', response);
             return {response: response, error: null}
         })
         .catch(error => {
-            // console.log('error', error);
             return {response: null, error: error}
         })
 }
@@ -124,15 +119,12 @@ function fetchEditTasks(payload) {
             return {response: response, error: null}
         })
         .catch(error => {
-            console.log('error', error);
             return {response: null, error: error}
         })
 }
 
 function* EditTasks(element) {
-    console.log('payload', element.payload);
     const {response, error} = yield call(fetchEditTasks, element.payload);
-    console.log('response from edit task',response, error);
     if (response)
         yield put({type: "TASKS_EDIT_SUCCESS", payload: element});
     else

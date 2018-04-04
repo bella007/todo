@@ -18,19 +18,16 @@ export const addTodo = (req, res) => {
         if (err) {
             return res.json({'success': false, 'message': 'Some Error'});
         }
-
         return res.json({'success': true, 'message': 'Todo added successfully', todo});
     })
 };
 
 export const deleteTodo = (req, res) => {
-    console.log('req.params.id', req.params.id);
 
     let element_id = mongoose.Types.ObjectId(req.params._id);
 
     Todo.findByIdAndRemove(element_id, function (err) {
         if (err) throw err;
-        console.log('Task deleted!');
     });
 
 };
@@ -40,7 +37,6 @@ export const editTodo = (req, res) => {
 
     Todo.findOneAndUpdate({_id: req.body.data._id}, req.body.data, {title: req.body.input_val}, (err, todo) => {
         if(err){
-            console.log('ERROR FROM EDIT TODO');
             return res.json({'success':false,'message':'Some Error'});
         }
 
