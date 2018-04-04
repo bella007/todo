@@ -3,13 +3,14 @@ import mongoose from 'mongoose';
 import Todo from '../models/todo.server.model';
 
 export const getTodos = (req, res) => {
-    Todo.find().exec((err, todos) => {
+    Todo.find((err, todos) => {
         if (err) {
             return res.json({'success': false, 'message': 'Some Error'});
         }
 
         return res.json({'success': true, 'message': 'Todos fetched successfully', todos});
-    });
+    }
+    );
 };
 
 export const addTodo = (req, res) => {
