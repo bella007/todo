@@ -43,12 +43,6 @@ app.get('/', (req, res) => {
     return res.end('Api WORKING');
 });
 
-// app.post("/task-list", (req, res, next) => {
-//     console.log( 'request.body in app.js', req.body);
-//     // res.end('task-list working');
-// });
-
-
 app.use((req, res, next) => {
     res.status(404).send('<h2 align=center>Page Not Found!</h2>');
 });
