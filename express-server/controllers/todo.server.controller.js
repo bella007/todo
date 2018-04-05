@@ -26,9 +26,7 @@ export const addTodo = (req, res) => {
 
 export const deleteTodo = (req, res) => {
 
-    let element_id = req.params.id;
-    console.log('req', req.params.id);
-    Todo.findByIdAndRemove(element_id, function (err, ololo) {
+    Todo.findByIdAndRemove(req.params.id, function (err) {
         if (err) throw err;
 
         return res.json({'success': true, 'message': 'DELETED'});
@@ -37,6 +35,7 @@ export const deleteTodo = (req, res) => {
 
 export const editTodo = (req, res) => {
     req.body.data.title = req.body.input_val;
+    console.log('req.body', req.body)
 
     Todo.findOneAndUpdate({_id: req.body.data._id}, req.body.data, {title: req.body.input_val}, (err, todo) => {
         if (err) {
@@ -46,4 +45,18 @@ export const editTodo = (req, res) => {
         return res.json({'success': true, 'message': 'EDITED'});
     })
 
+};
+
+
+export const updateTodo = (req, res) => {
+    console.log('req.paramsreq.params', req.params);
+    console.log('req.bodyreq.bodyreq.bodyreq.bodyreq.bodyreq.bodyreq.bodyreq.body', !req.body.done);
+
+    Todo.findOneAndUpdate({_id: req.body._id}, {done: !req.body.done}, (err, todo) => {
+        if (err) {
+            return res.json({'success': false, 'message': 'Some Error'});
+        }
+
+        return res.json({'success': true, 'message': 'updated'});
+    })
 };

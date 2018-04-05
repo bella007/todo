@@ -8,9 +8,10 @@ export default function tasks(state = initial, action) {
     let {type, payload} = action;
 
     switch (type) {
-        case types.CHECKED_TASK:
+        case types.TASKS_CHECKED_SUCCESS:
+            console.log(payload)
             return state.map(task => {
-                if (task._id === payload) {
+                if (task._id === payload.payload.data._id) {
                     return Object.assign({}, task, {
                         done: !task.done
                     })
@@ -38,6 +39,21 @@ export default function tasks(state = initial, action) {
                 }
                 return task
             });
+
+        case types.TASKS_CHECKED_REQUEST:
+            console.log('TASKS_CHECKED_REQUEST');
+            return state;
+        // case types.TASKS_CHECKED_SUCCESS:
+        //     return state.map(task => {
+        //         if (task._id === payload._id) {
+        //             return Object.assign({}, task, {
+        //                 done: !task.done
+        //             })
+        //         }
+        //         return tasks
+        //     });
+
+            // return state;
 
         default:
             return state;

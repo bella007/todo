@@ -8,7 +8,7 @@ import Task from './Task'
 import AddTask from './AddTask'
 import {withRouter} from 'react-router';
 
-import {addTask, delTask, editTask, checkedTask, tasks_request,tasks_del_request, tasks_edit_request} from '../../actions';
+import { tasks_checked_request, tasks_request,tasks_del_request, tasks_edit_request} from '../../actions';
 
 let filters = {
     '/TaskList': (item, index) => item,
@@ -24,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({addTask, delTask, editTask, checkedTask, tasks_request, tasks_del_request, tasks_edit_request}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({ tasks_checked_request, tasks_request, tasks_del_request, tasks_edit_request}, dispatch) );
 
 const tab_style = {
     width: 400,
@@ -52,9 +52,8 @@ class TaskList extends Component {
                            index={index}
                            key={index}
                            delete={this.props.tasks_del_request}
-                           // edit={this.props.editTask}
                            edit={this.props.tasks_edit_request}
-                           checked={this.props.checkedTask}
+                           checked={this.props.tasks_checked_request}
                     />
                 ))}
                 <button onClick={this.handleOnKeyDown} value="">All</button>

@@ -39,7 +39,7 @@ class Task extends Component {
     };
 
     handleChangeState = () => (
-        this.props.checked(this.props.data._id)
+        this.props.checked({data:this.props.data})
     );
 
     handleEditToggle = () => {

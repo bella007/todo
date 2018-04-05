@@ -1,8 +1,5 @@
 import * as types from '../constants/ActionTypes';
 
-export const addTask = (payload) => ({type: types.ADD_TASK, payload});
-export const delTask = (payload) => ({type: types.DEL_TASK, payload});
-export const editTask = (payload) => ({type: types.EDITED_TASK, payload});
 export const checkedTask = (payload) => ({type: types.CHECKED_TASK, payload});
 
 
@@ -28,3 +25,7 @@ export const tasks_del_failure = (payload) => ({type: types.TASKS_DEL_FAILURE, p
 export const tasks_edit_request = (payload) => ({type: types.TASKS_EDIT_REQUEST, payload});
 export const tasks_edit_success = (payload) => ({type: types.TASKS_EDIT_SUCCESS, payload});
 export const tasks_edit_failure = (payload) => ({type: types.TASKS_EDIT_FAILURE, payload});
+
+export const tasks_checked_request = (payload) => ({type: types.TASKS_CHECKED_REQUEST, payload});
+export const tasks_checked_success = (payload) => ({type: types.TASKS_CHECKED_SUCCESS, payload});
+export const tasks_checked_failure = (payload) => ({type: types.TASKS_CHECKED_FAILURE, payload});
