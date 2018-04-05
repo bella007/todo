@@ -47,8 +47,8 @@ const middleware = applyMiddleware(sagaMiddleware, tasksMiddleware);
 // const middleware = applyMiddleware(thunk ,tasksMiddleware);
 
 const store = createStore(
-    reducers, middleware);
-// reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), middleware);
+    // reducers, middleware);
+reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), middleware);
 export default store;
 
 sagaMiddleware.run(rootSaga);
