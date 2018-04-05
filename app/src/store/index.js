@@ -43,7 +43,7 @@ const tasksMiddleware = store => next => (action) => {
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middleware = applyMiddleware(sagaMiddleware, tasksMiddleware);
+const middleware = applyMiddleware(sagaMiddleware);
 // const middleware = applyMiddleware(thunk ,tasksMiddleware);
 
 const store = createStore(
