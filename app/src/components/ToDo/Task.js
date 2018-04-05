@@ -3,10 +3,8 @@ import {ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import SvgIcon from 'material-ui/SvgIcon';
 import {red500} from 'material-ui/styles/colors';
-import '../../App.css';
 import DisplayTask from './DisplayTask'
 import EditableTask from './EditableTask'
-import {withRouter} from 'react-router';
 
 const iconStyles = {
     marginRight: 24,
@@ -39,7 +37,7 @@ class Task extends Component {
     };
 
     handleChangeState = () => (
-        this.props.checked({data:this.props.data})
+        this.props.checked({data: this.props.data})
     );
 
     handleEditToggle = () => {
@@ -84,4 +82,4 @@ class Task extends Component {
     }
 }
 
-export default withRouter(Task);
+export default Task;

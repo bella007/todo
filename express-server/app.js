@@ -1,8 +1,7 @@
 const path = require('path'),
     express = require('express'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    SourceMapSupport = require('source-map-support');
+    mongoose = require('mongoose');
 
 
 import todoRoutes from './routes/todo.server.route';
@@ -33,8 +32,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://admin:123@ds041484.mlab.com:41484/todo_listtt', {
     useMongoClient: true,
 });
-
-SourceMapSupport.install();
 
 app.use('/task-list', todoRoutes);
 

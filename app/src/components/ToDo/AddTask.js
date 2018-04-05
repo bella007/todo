@@ -5,7 +5,7 @@ import '../../App.css';
 
 import {tasks_add_request} from '../../actions';
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({ tasks_add_request}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({tasks_add_request}, dispatch) );
 
 class AddTask extends Component {
 
@@ -29,7 +29,6 @@ class AddTask extends Component {
         }
 
         this.setState({changed_task: ''});
-
 
 
     };

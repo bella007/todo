@@ -21,8 +21,8 @@ class App extends Component {
 
                 <Switch>
                     <Route exact path='/' component={Hello}/>
-
                     <Route path='/TaskList' component={TaskList}/>
+
                     <Route exact path='/UserList' component={UserList}/>
                     <Route path={`/UserList/user/:id`} component={ViewUser}/>
                     <Route path={`/UserList/user/edit/:id`} component={EditUser}/>

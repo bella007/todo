@@ -15,10 +15,6 @@ function* fetchUsers() {
         yield put({type: "USERS_FAILURE", error})
 }
 
-export function* watchFetchData() {
-    yield takeEvery('USERS_REQUEST', fetchUsers)
-}
-
 // TASKS
 
 const apiUrl = "http://localhost:3001/task-list";
@@ -41,10 +37,6 @@ function* tasks() {
         yield put({type: "TASKS_FAILURE", error})
 }
 
-export function* watchTasksRequest() {
-    yield takeEvery('TASKS_REQUEST', tasks)
-}
-
 // ADD TASK
 
 function fetchAddTasks(payload) {
@@ -56,7 +48,6 @@ function fetchAddTasks(payload) {
     })
         .then(response => response.json())
         .then(response => {
-            console.log('response after fetch', response)
             return {response: response, error: null}
         })
         .catch(error => {
@@ -65,27 +56,18 @@ function fetchAddTasks(payload) {
 }
 
 function* AddTasks(act) {
-    // let new_task = {...act.payload, done: false, id: 5};
     let new_task = {...act.payload, done: false};
     const {response, error} = yield call(fetchAddTasks, new_task);
-    console.log('responseee', response)
     if (response)
         yield put({type: "TASKS_ADD_SUCCESS", payload: response.todo});
     else
         yield put({type: "TASKS_ADD_FAILURE", error})
 }
 
-export function* watchAddTask() {
-    yield takeEvery('TASKS_ADD_REQUEST', AddTasks)
-}
-
-
 // DELETE TASK
 
 function fetchDelTasks(task_id) {
-    console.log('task_id', task_id);
     return fetch(`http://localhost:3001/task-list/${task_id}`, {
-        // return fetch(apiUrl+'/'+task_id, {
         method: 'delete',
         body: task_id
     }).then(response => response.json())
@@ -98,7 +80,7 @@ function fetchDelTasks(task_id) {
 }
 
 function* DelTasks(element) {
-    console.log('task_id', element);
+
     const {response, error} = yield call(fetchDelTasks, element.payload);
     if (response)
         yield put({type: "TASKS_DEL_SUCCESS", payload: element.payload});
@@ -106,9 +88,6 @@ function* DelTasks(element) {
         yield put({type: "TASKS_DEL_FAILURE", error})
 }
 
-export function* watchDelTask() {
-    yield takeEvery('TASKS_DEL_REQUEST', DelTasks)
-}
 
 // EDIT TASK
 function fetchEditTasks(payload) {
@@ -135,15 +114,10 @@ function* EditTasks(element) {
         yield put({type: "TASKS_EDIT_FAILURE", error})
 }
 
-export function* watchEditTask() {
-    yield takeEvery('TASKS_EDIT_REQUEST', EditTasks)
-}
 
 // CHECKED TASK
 function fetchChekedTasks(element) {
-    console.log('task_id', element);
     return fetch(`http://localhost:3001/task-list/${element._id}`, {
-        // return fetch(apiUrl+'/'+task_id, {
         method: 'put',
         headers: {'Content-Type': 'application/json',},
         body: JSON.stringify(element)
@@ -158,25 +132,21 @@ function fetchChekedTasks(element) {
 
 function* ChekedTasks(element) {
     const {response, error} = yield call(fetchChekedTasks, element.payload.data);
-    console.log('responseeeeee from cheked task', response);
     if (response)
         yield put({type: "TASKS_CHECKED_SUCCESS", payload: element});
     else
         yield put({type: "TASKS_CHECKED_FAILURE", error})
 }
 
-export function* watchChekedTask() {
-    yield takeEvery('TASKS_CHECKED_REQUEST', ChekedTasks)
-}
 
 
 export default function* rootSaga() {
     yield all([
-        watchFetchData(),
-        watchAddTask(),
-        watchTasksRequest(),
-        watchDelTask(),
-        watchEditTask(),
-        watchChekedTask(),
+        takeEvery('USERS_REQUEST', fetchUsers),
+        takeEvery('TASKS_REQUEST', tasks),
+        takeEvery('TASKS_ADD_REQUEST', AddTasks),
+        takeEvery('TASKS_DEL_REQUEST', DelTasks),
+        takeEvery('TASKS_EDIT_REQUEST', EditTasks),
+        takeEvery('TASKS_CHECKED_REQUEST', ChekedTasks),
     ])
 };

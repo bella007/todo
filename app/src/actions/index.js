@@ -1,8 +1,5 @@
 import * as types from '../constants/ActionTypes';
 
-export const checkedTask = (payload) => ({type: types.CHECKED_TASK, payload});
-
-
 export const getAllUsers = (payload) => ({type: types.GET_ALL_USERS, payload});
 export const edit_user_field = (payload) => ({type: types.EDIT_USER_FIELD, payload});
 

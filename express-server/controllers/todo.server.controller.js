@@ -1,5 +1,3 @@
-import mongoose from 'mongoose';
-
 import Todo from '../models/todo.server.model';
 
 export const getTodos = (req, res) => {
@@ -34,8 +32,6 @@ export const deleteTodo = (req, res) => {
 };
 
 export const editTodo = (req, res) => {
-    req.body.data.title = req.body.input_val;
-    console.log('req.body', req.body)
 
     Todo.findOneAndUpdate({_id: req.body.data._id}, req.body.data, {title: req.body.input_val}, (err, todo) => {
         if (err) {
@@ -49,14 +45,11 @@ export const editTodo = (req, res) => {
 
 
 export const updateTodo = (req, res) => {
-    console.log('req.paramsreq.params', req.params);
-    console.log('req.bodyreq.bodyreq.bodyreq.bodyreq.bodyreq.bodyreq.bodyreq.body', !req.body.done);
 
-    Todo.findOneAndUpdate({_id: req.body._id}, {done: !req.body.done}, (err, todo) => {
+    Todo.findOneAndUpdate({_id: req.body._id}, {done: !req.body.done}, (err) => {
         if (err) {
             return res.json({'success': false, 'message': 'Some Error'});
         }
-
         return res.json({'success': true, 'message': 'updated'});
     })
 };
