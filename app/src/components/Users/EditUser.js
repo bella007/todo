@@ -18,9 +18,10 @@ class EditUser extends Component {
     handleChangeInput = (e) => (
         this.setState({field_value: e.target.value})
     );
+
     handleSave = (e) => {
         this.props.edit_user_field({
-            user_id: this.props.user.id,
+            user_id: this.props.user._id,
             key_field: this.props.key_field,
             value_field: this.state.field_value
         });

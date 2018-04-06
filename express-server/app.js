@@ -5,6 +5,7 @@ const path = require('path'),
 
 
 import todoRoutes from './routes/todo.server.route';
+import userRoutes from './routes/users.server.route';
 
 const app = express();
 
@@ -34,6 +35,7 @@ mongoose.connect('mongodb://admin:123@ds041484.mlab.com:41484/todo_listtt', {
 });
 
 app.use('/task-list', todoRoutes);
+app.use('/user-list', userRoutes);
 
 app.get('/', (req, res) => {
     console.log("req", req.body);

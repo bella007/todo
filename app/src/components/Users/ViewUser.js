@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        user: state.users.filter((item) => (item.id == ownProps.match.params.id))[0]
+        user: state.users.filter((item) => (item.id == ownProps.match.params.id ||item.id == ownProps.match.params._id))[0]
     }
 };
 

@@ -1,5 +1,8 @@
 import {call, put, takeEvery, all} from 'redux-saga/effects'
 
+// USERS
+
+// GET ALL USERS from git hub
 function fetchProductsApi() {
     return fetch('https://api.github.com/users?since=135')
         .then(response => (response.json()))
@@ -8,12 +11,127 @@ function fetchProductsApi() {
 }
 
 function* fetchUsers() {
-    const {response, error} = yield call(fetchProductsApi);
-    if (response)
-        yield put({type: "USERS_SUCCESS", payload: response});
-    else
-        yield put({type: "USERS_FAILURE", error})
+    // const {response, error} = yield call(fetchProductsApi);
+    // if (response) {
+    //     yield put({type: "USERS_SUCCESS", payload: response});
+    // }
+    // else
+    //     yield put({type: "USERS_FAILURE", error})
 }
+
+const usersUrl = "http://localhost:3001/user-list";
+
+// GET ALL USERS
+function fetchAllUsers() {
+    return fetch(usersUrl)
+        .then(response => (response.json()))
+        .then(response => {
+            return {response: response.users, error: null}
+        })
+        .catch(error => ({response: null, error: error}))
+}
+
+function* users() {
+    const {response, error} = yield call(fetchAllUsers);
+    if (response)
+        yield put({type: "GET_USERS_SUCCESS", payload: response});
+    else
+        yield put({type: "GET_USERS_FAILURE", error})
+}
+
+// ADD TASK
+
+    function fetchAddUsers(payload) {
+
+        return fetch(usersUrl, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',},
+            body: JSON.stringify(payload)
+        })
+            .then(response => response.json())
+            .then(response => {
+                return {response: response, error: null}
+            })
+            .catch(error => {
+                return {response: null, error: error}
+            })
+    }
+
+    function* AddUsers(act) {
+        console.log(act.payload);
+        const {response, error} = yield call(fetchAddUsers, act.payload);
+        if (response)
+            yield put({type: "USERS_ADD_SUCCESS", payload: response.user});
+        else
+            yield put({type: "USERS_ADD_FAILURE", error})
+    }
+
+// DELETE USER
+
+function fetchDelUsers(task_id) {
+    return fetch(usersUrl+'/'+task_id, {
+        method: 'delete',
+        body: task_id
+    }).then(response => response.json())
+        .then(response => {
+            return {response: response, error: null}
+        })
+        .catch(error => {
+            return {response: null, error: error}
+        })
+}
+
+function* DelUsers(element) {
+
+    const {response, error} = yield call(fetchDelUsers, element.payload);
+    if (response)
+        yield put({type: "USERS_DEL_SUCCESS", payload: element.payload});
+    else
+        yield put({type: "USERS_DEL_FAILURE", error})
+}
+
+// // EDIT USERS
+function fetchEditUsers(payload) {
+
+    return fetch(usersUrl + '/' + payload.data._id, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify(payload)
+    })
+        .then(response => JSON.stringify(response))
+        .then(response => {
+            return {response: response, error: null}
+        })
+        .catch(error => {
+            return {response: null, error: error}
+        })
+}
+
+function* EditUsers(element) {
+    console.log('sagaaaaaaaaaaaaas')
+    const {response, error} = yield call(fetchEditUsers, element.payload);
+    if (response)
+        yield put({type: "USERS_EDIT_SUCCESS", payload: element});
+    else
+        yield put({type: "USERS_EDIT_FAILURE", error})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // TASKS
 
@@ -139,14 +257,19 @@ function* ChekedTasks(element) {
 }
 
 
-
 export default function* rootSaga() {
     yield all([
-        takeEvery('USERS_REQUEST', fetchUsers),
+
         takeEvery('TASKS_REQUEST', tasks),
         takeEvery('TASKS_ADD_REQUEST', AddTasks),
         takeEvery('TASKS_DEL_REQUEST', DelTasks),
         takeEvery('TASKS_EDIT_REQUEST', EditTasks),
         takeEvery('TASKS_CHECKED_REQUEST', ChekedTasks),
+
+        takeEvery('USERS_REQUEST', fetchUsers),
+        takeEvery('USERS_ADD_REQUEST', AddUsers),
+        takeEvery('GET_USERS_REQUEST', users),
+        takeEvery('USERS_DEL_REQUEST', DelUsers),
+        takeEvery('USERS_EDIT_REQUEST', EditUsers),
     ])
 };

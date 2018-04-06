@@ -28,6 +28,7 @@ export default function tasks(state = initial, action) {
             });
 
         case types.TASKS_CHECKED_SUCCESS:
+
             return state.map(task => {
                 if (task._id === payload.payload.data._id) {
                     return Object.assign({}, task, {
@@ -37,6 +38,9 @@ export default function tasks(state = initial, action) {
                 return task
             });
 
+        case types.USERS_EDIT_SUCCESS:
+
+            return
         default:
             return state;
     }
