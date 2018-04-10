@@ -2,6 +2,7 @@ import InitialState from '../constants/InitialState';
 import * as types from '../constants/ActionTypes';
 
 const initial = InitialState.users;
+// const initial_tasks = InitialState.tasks;
 
 export default function users(state = initial, action) {
     let {type, payload} = action;
@@ -43,6 +44,7 @@ export default function users(state = initial, action) {
             return state.filter(item => item._id !== payload);
 
         case types.USERS_EDIT_SUCCESS:
+
             console.log('payload', payload);
             return state.map((user) => {
                 if (user._id === payload.user_id) {
@@ -52,6 +54,10 @@ export default function users(state = initial, action) {
                 }
                 return user
             });
+
+        case types.USER_TASKS_SUCCESS:
+            console.log('USER_TASKS_SUCCESSUSER_TASKS_SUCCESSUSER_TASKS_SUCCESS', payload);
+            return state;
 
         default:
             return state;

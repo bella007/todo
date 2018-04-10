@@ -25,7 +25,9 @@ export const users_edit_request = (payload) => ({type: types.USERS_EDIT_REQUEST,
 export const users_edit_success = (payload) => ({type: types.USERS_EDIT_SUCCESS, payload});
 export const users_edit_failure = (payload) => ({type: types.USERS_EDIT_FAILURE, payload});
 
-
+export const user_tasks_request = (payload) => ({type: types.USER_TASKS_REQUEST, payload});
+export const user_tasks_success = (payload) => ({type: types.USER_TASKS_SUCCESS, payload});
+export const user_tasks_failure = (payload) => ({type: types.USER_TASKS_FAILURE, payload});
 // TASKS
 export const tasks_request = (payload) => ({type: types.TASKS_REQUEST, payload});
 export const tasks_success = (payload) => ({type: types.TASKS_SUCCESS, payload});

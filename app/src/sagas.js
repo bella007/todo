@@ -41,35 +41,35 @@ function* users() {
 
 // ADD TASK
 
-    function fetchAddUsers(payload) {
+function fetchAddUsers(payload) {
 
-        return fetch(usersUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify(payload)
+    return fetch(usersUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify(payload)
+    })
+        .then(response => response.json())
+        .then(response => {
+            return {response: response, error: null}
         })
-            .then(response => response.json())
-            .then(response => {
-                return {response: response, error: null}
-            })
-            .catch(error => {
-                return {response: null, error: error}
-            })
-    }
+        .catch(error => {
+            return {response: null, error: error}
+        })
+}
 
-    function* AddUsers(act) {
-        console.log(act.payload);
-        const {response, error} = yield call(fetchAddUsers, act.payload);
-        if (response)
-            yield put({type: "USERS_ADD_SUCCESS", payload: response.user});
-        else
-            yield put({type: "USERS_ADD_FAILURE", error})
-    }
+function* AddUsers(act) {
+    console.log(act.payload);
+    const {response, error} = yield call(fetchAddUsers, act.payload);
+    if (response)
+        yield put({type: "USERS_ADD_SUCCESS", payload: response.user});
+    else
+        yield put({type: "USERS_ADD_FAILURE", error})
+}
 
 // DELETE USER
 
 function fetchDelUsers(task_id) {
-    return fetch(usersUrl+'/'+task_id, {
+    return fetch(usersUrl + '/' + task_id, {
         method: 'delete',
         body: task_id
     }).then(response => response.json())
@@ -93,7 +93,7 @@ function* DelUsers(element) {
 // // EDIT USERS
 function fetchEditUsers(payload) {
 
-    return fetch(usersUrl + '/' + payload.user_id   , {
+    return fetch(usersUrl + '/' + payload.user_id, {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
         body: JSON.stringify(payload)
@@ -114,6 +114,35 @@ function* EditUsers(element) {
     else
         yield put({type: "USERS_EDIT_FAILURE", error})
 }
+
+
+function fetchUserTasks(payload) {
+    console.log('payload',payload);
+    return fetch(usersUrl+'/'+payload)
+        .then(response => (response.json()))
+        .then(response => {
+            return {response: response, error: null}
+        })
+        .catch(error => ({response: null, error: error}))
+}
+
+function* UserTasks(element) {
+    console.log('sagaaaaaaassssssssss', element.payload);
+    const {response, error} = yield call(fetchUserTasks, element.payload);
+    console.log('response in saga',response, error);
+    if (response)
+        yield put({type: "USER_TASKS_SUCCESS", payload: element.payload});
+    else
+        yield put({type: "USER_TASKS_FAILURE", error})
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -270,5 +299,6 @@ export default function* rootSaga() {
         takeEvery('GET_USERS_REQUEST', users),
         takeEvery('USERS_DEL_REQUEST', DelUsers),
         takeEvery('USERS_EDIT_REQUEST', EditUsers),
+        takeEvery('USER_TASKS_REQUEST', UserTasks),
     ])
 };

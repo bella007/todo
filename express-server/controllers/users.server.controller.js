@@ -41,3 +41,17 @@ export const editUser = (req, res) => {
     })
 
 };
+
+export const getTasks = (req, res) => {
+    console.log('req.params', req.params);
+    User.find({_id:req.params},(err, tasks) => {
+            if (err) {
+                console.log(err)
+                return res.json({'success': false, 'message': err});
+            }
+            return res.json({'success': true, 'message': 'Todos fetched successfullqy', tasks});
+
+        }
+    );
+
+};

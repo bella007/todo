@@ -33,6 +33,7 @@ class UserList extends Component {
                         this.props.users.map((item, index) => (<User data={item} key={index} delete={this.props.users_del_request} />))
                     }
                 </List>
+
             </div>
         );
     }

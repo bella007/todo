@@ -6,6 +6,7 @@ import Hello from './components/Hello'
 import UserList from './components/Users/UserList'
 import ViewUser from './components/Users/ViewUser'
 import EditUser from './components/Users/EditUser'
+import UserTasks from './components/Users/UserTasks'
 import {Route, Switch} from 'react-router-dom';
 
 class App extends Component {
@@ -24,7 +25,10 @@ class App extends Component {
                     <Route path='/TaskList' component={TaskList}/>
 
                     <Route exact path='/UserList' component={UserList}/>
+                    <Route path={`/UserList/user/:id/tasks`} component={UserTasks}/>
                     <Route path={`/UserList/user/:id`} component={ViewUser}/>
+
+
                     <Route path={`/UserList/user/edit/:id`} component={EditUser}/>
                     <Route path="*" component={() => <div>Page Not Found</div>}/>
                 </Switch>

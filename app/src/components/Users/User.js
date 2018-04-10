@@ -29,23 +29,33 @@ class User extends Component {
         this.props.history.push(`UserList/user/${this.props.data.id || this.props.data._id}`);
     };
 
-    handleDelete = (e)=> {
+    handleDelete = (e) => {
         e.stopPropagation();
         console.log('delete from component');
         this.props.delete(this.props.data._id);
     };
 
+    goTasks = () => {
+        this.props.history.push(`UserList/user/${this.props.data.id || this.props.data._id}/tasks`);
+    };
+
     render() {
         return (
-            <div onClick={this.handleEdit}>
-                <ListItem
-                          rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh"
-                                                 onClick={this.handleDelete}/>}
-                >
-                {/*<ListItem onClick={this.handleEdit}*/}
-                {/*>*/}
-                    {this.props.data.login || this.props.data.name}
-                </ListItem>
+            <div>
+                <div onClick={this.handleEdit}>
+                    <ListItem
+                        rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh"
+                                               onClick={this.handleDelete}/>}
+                    >
+                        {/*<ListItem onClick={this.handleEdit}*/}
+                        {/*>*/}
+                        {this.props.data.login || this.props.data.name}
+
+                    </ListItem>
+
+
+                </div>
+                <button onClick={this.goTasks}>Go to task</button>
             </div>
         );
     }
