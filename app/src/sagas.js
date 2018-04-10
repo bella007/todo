@@ -93,7 +93,7 @@ function* DelUsers(element) {
 // // EDIT USERS
 function fetchEditUsers(payload) {
 
-    return fetch(usersUrl + '/' + payload.data._id, {
+    return fetch(usersUrl + '/' + payload.user_id   , {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
         body: JSON.stringify(payload)
@@ -108,10 +108,9 @@ function fetchEditUsers(payload) {
 }
 
 function* EditUsers(element) {
-    console.log('sagaaaaaaaaaaaaas')
     const {response, error} = yield call(fetchEditUsers, element.payload);
     if (response)
-        yield put({type: "USERS_EDIT_SUCCESS", payload: element});
+        yield put({type: "USERS_EDIT_SUCCESS", payload: element.payload});
     else
         yield put({type: "USERS_EDIT_FAILURE", error})
 }

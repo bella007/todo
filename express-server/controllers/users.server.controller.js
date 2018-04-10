@@ -12,9 +12,7 @@ export const getUsers = (req, res) => {
 };
 
 export const addUsers = (req, res) => {
-    console.log(req.body);
     const newUser = new User(req.body);
-    console.log('newUser', newUser);
     newUser.save((err, user) => {
         if (err) {
             return res.json({'success': false, 'message': 'Some Error'});
@@ -24,7 +22,6 @@ export const addUsers = (req, res) => {
 };
 
 export const deleteUser = (req, res) => {
-    console.log('req.params.id', req.params.id);
     User.findByIdAndRemove(req.params.id, function (err) {
         if (err) throw err;
 
@@ -33,12 +30,13 @@ export const deleteUser = (req, res) => {
 };
 
 export const editUser = (req, res) => {
-    console.log('HELLOE FROM CONTROLLER');
-    User.findOneAndUpdate({_id: req.body.data._id}, req.body.data, {title: req.body.input_val}, (err, user) => {
+
+    let field = req.body.key_field;
+    User.findOneAndUpdate({_id: req.body.user_id}, {[field]: req.body.value_field}, (err, user) => {
+        console.log(user);
         if (err) {
             return res.json({'success': false, 'message': 'Some Error'});
         }
-
         return res.json({'success': true, 'message': 'EDITED'});
     })
 

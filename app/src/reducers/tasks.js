@@ -38,9 +38,6 @@ export default function tasks(state = initial, action) {
                 return task
             });
 
-        case types.USERS_EDIT_SUCCESS:
-
-            return
         default:
             return state;
     }

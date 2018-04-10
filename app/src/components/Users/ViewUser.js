@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 import {ListItem} from 'material-ui/List';
 import {List} from 'material-ui/List';
 import EditUser from "./EditUser";
-import {edit_user_field} from '../../actions';
+import {edit_user_field, users_edit_request} from '../../actions';
 import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        user: state.users.filter((item) => (item.id == ownProps.match.params.id ||item.id == ownProps.match.params._id))[0]
+        user: state.users.filter((item) => (item._id == ownProps.match.params.id))[0]
     }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({edit_user_field}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({edit_user_field, users_edit_request}, dispatch) );
 
 class ViewUser extends Component {
     constructor(props) {
@@ -24,8 +24,8 @@ class ViewUser extends Component {
 
     userEdit = (key) => {
         key ?
-        this.setState({editable: key})
-            :this.setState({editable: false})
+            this.setState({editable: key})
+            : this.setState({editable: false})
     };
 
     render() {
@@ -35,11 +35,13 @@ class ViewUser extends Component {
                     {(Object.keys(this.props.user)).map((key, index) => (
 
                         <ListItem key={index}>
-                            {this.state.editable === 'id' ||this.state.editable !== key ?
-                                <div onDoubleClick={() => this.userEdit(key)}>{key}:{this.props.user[key]}</div>
+                            {this.state.editable === 'id' || this.state.editable !== key ?
+                                <div onDoubleClick={() => this.userEdit(key)}>
+                                    {key}:{this.props.user[key]}
+                                </div>
                                 : <EditUser user={this.props.user}
                                             key_field={key}
-                                            edit_user_field={this.props.edit_user_field}
+                                            edit_user_field={this.props.users_edit_request}
                                             userEdit={this.userEdit}/>
                             }
                         </ListItem>

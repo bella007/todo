@@ -1,7 +1,6 @@
 import InitialState from '../constants/InitialState';
 import * as types from '../constants/ActionTypes';
 
-// const initial = JSON.parse(localStorage.getItem('users')) || InitialState.users;
 const initial = InitialState.users;
 
 export default function users(state = initial, action) {
@@ -23,7 +22,7 @@ export default function users(state = initial, action) {
         case types.EDIT_USER_FIELD:
             console.log('payload', payload);
             return state.map((user) => {
-                if (user.id === payload.user_id) {
+                if (user._id === payload.user_id) {
                     return Object.assign({}, user, {
                         [payload.key_field]: payload.value_field
                     })
@@ -44,13 +43,14 @@ export default function users(state = initial, action) {
             return state.filter(item => item._id !== payload);
 
         case types.USERS_EDIT_SUCCESS:
-            return state.map(task => {
-                if (task._id === payload.payload.data._id) {
-                    return Object.assign({}, task, {
-                        title: payload.payload.input_val
+            console.log('payload', payload);
+            return state.map((user) => {
+                if (user._id === payload.user_id) {
+                    return Object.assign({}, user, {
+                        [payload.key_field]: payload.value_field
                     })
                 }
-                return task
+                return user
             });
 
         default:
