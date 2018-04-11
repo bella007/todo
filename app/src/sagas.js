@@ -33,6 +33,7 @@ function fetchAllUsers() {
 
 function* users() {
     const {response, error} = yield call(fetchAllUsers);
+    console.log("USERS RESPONSE", response );
     if (response)
         yield put({type: "GET_USERS_SUCCESS", payload: response});
     else
@@ -180,6 +181,7 @@ function fetchTasks() {
 
 function* tasks() {
     const {response, error} = yield call(fetchTasks);
+    console.log("TASK RESPONSE", response );
     if (response)
         yield put({type: "TASKS_SUCCESS", payload: response});
     else

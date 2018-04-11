@@ -41,6 +41,7 @@ class User extends Component {
     render() {
         return (
             <div>
+                {console.log('this.props.tasks', this.props.tasks)}
                 <div onClick={this.handleEdit}>
                     <ListItem
                         rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh"
