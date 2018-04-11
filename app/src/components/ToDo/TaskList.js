@@ -19,14 +19,10 @@ let filters = {
 
 const mapStateToProps = (state, ownProps) => {
     let filter_params = ownProps.location.pathname;
-    console.log(ownProps.match.params.id)
     return {
         tasks: ownProps.match.params.id ? user_tasks_request({owner_id:ownProps.match.params.id})
             :state.tasks.filter(filters[filter_params])
     }
-//     return {
-//         tasks: state.tasks.filter(filters[filter_params])
-//     }
 };
 
 const mapDispatchToProps = dispatch => ( bindActionCreators({
@@ -53,7 +49,7 @@ class TaskList extends Component {
 
     render() {
         return (
-            <div style={tab_style}>
+                <div style={tab_style}>
                 <AddTask/>
                 {this.props.tasks.map((item, index) => (
                     < Task data={item}

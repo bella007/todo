@@ -24,6 +24,7 @@ class AddTask extends Component {
         if (this.state.changed_task.trim() !== '') {
             let new_task = {
                 title: this.state.changed_task,
+                owner_id: this.props.user_id ? this.props.user_id : ''
             };
             this.props.tasks_add_request(new_task);
         }

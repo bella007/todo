@@ -68,10 +68,11 @@ function* AddUsers(act) {
 
 // DELETE USER
 
-function fetchDelUsers(task_id) {
-    return fetch(usersUrl + '/' + task_id, {
+function fetchDelUsers(user_id) {
+
+    return fetch(usersUrl + '/' + user_id, {
         method: 'delete',
-        body: task_id
+        body: user_id
     }).then(response => response.json())
         .then(response => {
             return {response: response, error: null}
@@ -116,6 +117,7 @@ function* EditUsers(element) {
 }
 
 
+// user tasks
 function fetchUserTasks(payload) {
     console.log('payload',payload);
     return fetch(usersUrl+'/'+payload)
@@ -130,8 +132,9 @@ function* UserTasks(element) {
     console.log('sagaaaaaaassssssssss', element.payload);
     const {response, error} = yield call(fetchUserTasks, element.payload);
     console.log('response in saga',response, error);
-    if (response)
-        yield put({type: "USER_TASKS_SUCCESS", payload: element.payload});
+    if (response){
+        yield put({type: "USER_TASKS_SUCCESS", payload: response.tasks});
+    }
     else
         yield put({type: "USER_TASKS_FAILURE", error})
 }

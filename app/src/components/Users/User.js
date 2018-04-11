@@ -6,9 +6,9 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log('ownProps.data.id', ownProps.data.id || ownProps.data._id)
     return {
-        user: state.users.filter((item) => (item.id == ownProps.data.id || item.id == ownProps.data._id ))
+        user: state.users.filter((item) => (item.id === ownProps.data.id || item.id === ownProps.data._id )),
+        tasks: state.tasks.filter((item, index) => item.owner_id === ownProps.match.params.id)
     }
 };
 
@@ -31,7 +31,6 @@ class User extends Component {
 
     handleDelete = (e) => {
         e.stopPropagation();
-        console.log('delete from component');
         this.props.delete(this.props.data._id);
     };
 
@@ -47,12 +46,8 @@ class User extends Component {
                         rightIcon={<DeleteIcon style={iconStyles} color={red500} className="hh"
                                                onClick={this.handleDelete}/>}
                     >
-                        {/*<ListItem onClick={this.handleEdit}*/}
-                        {/*>*/}
                         {this.props.data.login || this.props.data.name}
-
                     </ListItem>
-
 
                 </div>
                 <button onClick={this.goTasks}>Go to task</button>

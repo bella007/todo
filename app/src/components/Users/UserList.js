@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 
 import {List} from 'material-ui/List';
 import User from './User'
-import {users_request, get_users_request, users_del_request} from '../../actions';
+import {users_request, get_users_request, users_del_request, tasks_del_request} from '../../actions';
 import {withRouter} from 'react-router';
 import AddUser from './AddUser';
 
@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = dispatch => ( bindActionCreators({users_request, get_users_request, users_del_request}, dispatch) );
+const mapDispatchToProps = dispatch => ( bindActionCreators({users_request, get_users_request, users_del_request, tasks_del_request
+}, dispatch) );
 
 class UserList extends Component {
 
@@ -28,9 +29,13 @@ class UserList extends Component {
         return (
             <div>
                 <AddUser/>
-                <List>
+                <List >
                     {
-                        this.props.users.map((item, index) => (<User data={item} key={index} delete={this.props.users_del_request} />))
+                        this.props.users.map((item, index) => (<User data={item}
+                                                                     key={index}
+                                                                     delete={this.props.users_del_request}
+                                                                     delete_task={this.props.tasks_del_request}
+                        />))
                     }
                 </List>
 

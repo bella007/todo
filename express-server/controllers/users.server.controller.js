@@ -1,4 +1,5 @@
 import User from '../models/users.server.model';
+import Todo from '../models/todo.server.model';
 
 export const getUsers = (req, res) => {
     User.find((err, users) => {
@@ -22,11 +23,21 @@ export const addUsers = (req, res) => {
 };
 
 export const deleteUser = (req, res) => {
+
+
     User.findByIdAndRemove(req.params.id, function (err) {
         if (err) throw err;
 
         return res.json({'success': true, 'message': 'DELETED'});
     });
+
+    Todo.findByIdAndRemove(req.params.id, function (err) {
+        if (err) throw err;
+
+        return res.json({'success': true, 'message': 'DELETED'});
+    });
+
+
 };
 
 export const editUser = (req, res) => {
@@ -43,10 +54,9 @@ export const editUser = (req, res) => {
 };
 
 export const getTasks = (req, res) => {
-    console.log('req.params', req.params);
-    User.find({_id:req.params},(err, tasks) => {
+    Todo.find({owner_id: req.params.id},(err, tasks) => {
             if (err) {
-                console.log(err)
+                console.log(err);
                 return res.json({'success': false, 'message': err});
             }
             return res.json({'success': true, 'message': 'Todos fetched successfullqy', tasks});

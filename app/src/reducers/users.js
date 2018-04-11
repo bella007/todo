@@ -56,8 +56,10 @@ export default function users(state = initial, action) {
             });
 
         case types.USER_TASKS_SUCCESS:
-            console.log('USER_TASKS_SUCCESSUSER_TASKS_SUCCESSUSER_TASKS_SUCCESS', payload);
-            return state;
+            console.log('PAYLOADAAAAAAA', payload);
+            return [...state];
+            // return [...payload];
+
 
         default:
             return state;
