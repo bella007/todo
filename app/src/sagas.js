@@ -2,23 +2,6 @@ import {call, put, takeEvery, all} from 'redux-saga/effects'
 
 // USERS
 
-// GET ALL USERS from git hub
-function fetchProductsApi() {
-    return fetch('https://api.github.com/users?since=135')
-        .then(response => (response.json()))
-        .then(response => ({response: response, error: null}))
-        .catch(error => ({response: null, error: error}))
-}
-
-function* fetchUsers() {
-    // const {response, error} = yield call(fetchProductsApi);
-    // if (response) {
-    //     yield put({type: "USERS_SUCCESS", payload: response});
-    // }
-    // else
-    //     yield put({type: "USERS_FAILURE", error})
-}
-
 const usersUrl = "http://localhost:3001/user-list";
 
 // GET ALL USERS
@@ -33,7 +16,6 @@ function fetchAllUsers() {
 
 function* users() {
     const {response, error} = yield call(fetchAllUsers);
-    console.log("USERS RESPONSE", response );
     if (response)
         yield put({type: "GET_USERS_SUCCESS", payload: response});
     else
@@ -59,7 +41,6 @@ function fetchAddUsers(payload) {
 }
 
 function* AddUsers(act) {
-    console.log(act.payload);
     const {response, error} = yield call(fetchAddUsers, act.payload);
     if (response)
         yield put({type: "USERS_ADD_SUCCESS", payload: response.user});
@@ -118,10 +99,9 @@ function* EditUsers(element) {
 }
 
 
-// user tasks
+// GET USER'S TASKS
 function fetchUserTasks(payload) {
-    console.log('payload',payload);
-    return fetch(usersUrl+'/'+payload)
+    return fetch(usersUrl + '/' + payload)
         .then(response => (response.json()))
         .then(response => {
             return {response: response, error: null}
@@ -130,39 +110,13 @@ function fetchUserTasks(payload) {
 }
 
 function* UserTasks(element) {
-    console.log('sagaaaaaaassssssssss', element.payload);
     const {response, error} = yield call(fetchUserTasks, element.payload);
-    console.log('response in saga',response, error);
-    if (response){
+    if (response) {
         yield put({type: "USER_TASKS_SUCCESS", payload: response.tasks});
     }
     else
         yield put({type: "USER_TASKS_FAILURE", error})
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // TASKS
@@ -181,7 +135,6 @@ function fetchTasks() {
 
 function* tasks() {
     const {response, error} = yield call(fetchTasks);
-    console.log("TASK RESPONSE", response );
     if (response)
         yield put({type: "TASKS_SUCCESS", payload: response});
     else
@@ -299,7 +252,6 @@ export default function* rootSaga() {
         takeEvery('TASKS_EDIT_REQUEST', EditTasks),
         takeEvery('TASKS_CHECKED_REQUEST', ChekedTasks),
 
-        takeEvery('USERS_REQUEST', fetchUsers),
         takeEvery('USERS_ADD_REQUEST', AddUsers),
         takeEvery('GET_USERS_REQUEST', users),
         takeEvery('USERS_DEL_REQUEST', DelUsers),

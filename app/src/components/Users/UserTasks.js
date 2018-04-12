@@ -32,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ( bindActionCreators({
     tasks_checked_request,
-    tasks_request,  
+    tasks_request,
     tasks_del_request,
     tasks_edit_request,
     get_users_request
@@ -50,17 +50,19 @@ class TaskList extends Component {
         this.props.history.push(`/TaskList${e.target.value ? '/' + e.target.value : ''}`);
     };
     componentDidMount = () => {
-        this.props.tasks_request();
+        console.log('this.props.tasks_request();', this.props.tasks_request());
         this.props.get_users_request();
+        this.props.tasks_request();
+
     };
 
     render() {
         return (
             <div style={tab_style}>
-                {/*{console.log('this.props.user', this.props.user)}*/}
                 {console.log('this.props.user', this.props.tasks)}
                 {/*<span>user:  </span>{this.props.user.name}*/}
-                <AddTask />
+
+                <AddTask user_id={this.props.user._id}/>
                 {this.props.tasks.map((item, index) => (
                     < Task data={item}
                            index={index}
